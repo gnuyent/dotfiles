@@ -8,7 +8,6 @@
 " Author:  Brandon Nguyen <gnuyent>
 " URL:     https://github.com/gnuyent/dotfiles
 
-"
 " minpac initialization
 packadd minpac
 
@@ -20,6 +19,7 @@ call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() } })
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('mhartington/oceanic-next')
 call minpac#add('nvim-treesitter/nvim-treesitter')
+call minpac#add('puremourning/vimspector')
 call minpac#add('tpope/vim-obsession')
 " Completion Plugins
 call minpac#add('neoclide/coc.nvim')
@@ -30,8 +30,6 @@ call minpac#add('rhysd/vim-clang-format')
 " tmux/nvim Plugins
 call minpac#add('christoomey/vim-tmux-navigator')
 call minpac#add('melonmanchan/vim-tmux-resizer')
-
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-html', 'coc-rust-analyzer']
 
 " Enable mouse
 set mouse=a
