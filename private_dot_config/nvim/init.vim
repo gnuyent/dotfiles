@@ -66,3 +66,6 @@ nnoremap n nzz
 
 " Toggle center cursor
 nnoremap <leader>zz :let &scrolloff=999-&scrolloff<CR>
+
+" Indentation
+set foldmethod=indent
