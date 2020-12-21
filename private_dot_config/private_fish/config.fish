@@ -1,6 +1,6 @@
 set --export SHELL /usr/bin/fish
 set --export EDITOR nvim
-set --export DOTBARE_DIR $HOME/.config/dotfiles
+set --export BAT_THEME "Oceanic Next"
 
 # Custom bin
 if test -e $HOME/.local/bin
@@ -46,7 +46,7 @@ alias gcm='git commit -m'
 alias grep='rg'
 
 # cat
-alias cat='bat --theme=OneHalfDark -p'
+alias cat='bat -p'
 
 # vim
 alias vi='nvim'
@@ -60,4 +60,3 @@ alias ifconfig='ip -c addr'
 
 # nvim nightly
 alias nvim-upgrade='bash $HOME/.local/bin/nvim_build_script.sh'
-

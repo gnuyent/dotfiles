@@ -19,7 +19,6 @@ call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() } })
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('mhartington/oceanic-next')
 call minpac#add('nvim-treesitter/nvim-treesitter')
-call minpac#add('puremourning/vimspector')
 call minpac#add('tpope/vim-obsession')
 " Completion Plugins
 call minpac#add('neoclide/coc.nvim')
@@ -67,5 +66,5 @@ nnoremap n nzz
 " Toggle center cursor
 nnoremap <leader>zz :let &scrolloff=999-&scrolloff<CR>
 
-" Indentation
-set foldmethod=indent
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
