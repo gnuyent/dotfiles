@@ -1,6 +1,6 @@
 set --export SHELL /usr/bin/fish
 set --export EDITOR nvim
-set --export BAT_THEME "Oceanic Next"
+set --export BAT_THEME "ForestNightItalics"
 
 # Custom bin
 if test -e $HOME/.local/bin
