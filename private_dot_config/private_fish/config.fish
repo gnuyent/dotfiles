@@ -32,6 +32,8 @@ function fish_user_key_bindings
     bind \cz 'fg 2>/dev/null; commandline -f repaint'
 end
 
+navi widget fish | source
+
 # ls
 alias ls='exa --icons'
 alias la='exa -a --icons'
@@ -58,5 +60,5 @@ alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
 # ifconfig
 alias ifconfig='ip -c addr'
 
-# nvim nightly
-alias nvim-upgrade='bash $HOME/.local/bin/nvim_build_script.sh'
+# asdf version manager
+source ~/.asdf/asdf.fish

@@ -1,24 +1,7 @@
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-html', 'coc-rust-analyzer']
-
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=1
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-html', 'coc-rust-analyzer', 'coc-go']
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
-
-" Recently vim can merge signcolumn and number column into one
-set signcolumn=number
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by

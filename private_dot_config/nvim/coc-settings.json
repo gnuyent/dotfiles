@@ -1,13 +1,14 @@
 {
     "coc.preferences.formatOnSaveFiletypes": [
+        "go",
         "python",
-		"rust"
+	"rust"
 	],
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextCurrentLineOnly": false,
     "diagnostic.virtualTextPrefix": " ■ ",
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "flake8helled",
+    "python.linting.flake8Path": "flake8",
     "python.linting.mypyEnabled": true,
     "python.formatting.provider": "black",
 	"languageserver": {
