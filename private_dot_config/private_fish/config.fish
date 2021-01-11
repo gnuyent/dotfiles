@@ -7,14 +7,13 @@ if test -e $HOME/.local/bin
     set PATH $HOME/.local/bin $PATH
 end
 
+if test -e $HOME/bin
+    set PATH $HOME/bin $PATH
+end
+
 # Rust
 if test -e $HOME/.cargo/bin
     set PATH $HOME/.cargo/bin $PATH
-end
-
-# Dotbare
-if test -e $HOME/.dotbare
-    set PATH $HOME/.dotbare $PATH
 end
 
 # Dotnet
@@ -31,8 +30,6 @@ end
 function fish_user_key_bindings
     bind \cz 'fg 2>/dev/null; commandline -f repaint'
 end
-
-navi widget fish | source
 
 # ls
 alias ls='exa --icons'
@@ -59,6 +56,3 @@ alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
 
 # ifconfig
 alias ifconfig='ip -c addr'
-
-# asdf version manager
-source ~/.asdf/asdf.fish
