@@ -1,21 +1,33 @@
 {
-    "coc.preferences.formatOnSaveFiletypes": [
-        "go",
-        "python",
-	"rust"
+	"coc.preferences.formatOnSaveFiletypes": [
+		"go",
+		"python",
+		"rust"
 	],
-    "diagnostic.virtualText": true,
-    "diagnostic.virtualTextCurrentLineOnly": false,
-    "diagnostic.virtualTextPrefix": " ■ ",
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "flake8",
-    "python.linting.mypyEnabled": true,
-    "python.formatting.provider": "black",
+	"diagnostic.virtualText": true,
+	"diagnostic.virtualTextCurrentLineOnly": false,
+	"diagnostic.virtualTextPrefix": " ■ ",
+	"python.linting.flake8Enabled": true,
+	"python.linting.flake8Path": "flake8",
+	"python.linting.mypyEnabled": true,
+	"python.formatting.provider": "black",
 	"languageserver": {
 		"ccls": {
 			"command": "ccls",
-			"filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
-			"rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
+			"filetypes": [
+				"c",
+				"cc",
+				"cpp",
+				"c++",
+				"objc",
+				"objcpp"
+			],
+			"rootPatterns": [
+				".ccls",
+				"compile_commands.json",
+				".git/",
+				".hg/"
+			],
 			"initializationOptions": {
 				"cache": {
 					"directory": "/tmp/ccls"
@@ -25,10 +37,15 @@
 				}
 			}
 		},
-        "fortran": {
-            "command": "fortls",
-            "filetypes": ["fortran"],
-            "rootPatterns": [".fortls", ".git/"]
-        }
+		"fortran": {
+			"command": "fortls",
+			"filetypes": [
+				"fortran"
+			],
+			"rootPatterns": [
+				".fortls",
+				".git/"
+			]
+		}
 	}
 }

@@ -36,4 +36,8 @@ return require('packer').startup(function()
 	use {'psliwka/vim-smoothie'}
 	use {'rhysd/vim-clang-format'}
 	use {'sainnhe/forest-night'}
+
+  -- Markdown
+  use {'junegunn/goyo.vim'}
+  use {'vimwiki/vimwiki'}
 end)

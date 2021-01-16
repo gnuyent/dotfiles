@@ -16,6 +16,11 @@ if test -e $HOME/.cargo/bin
     set PATH $HOME/.cargo/bin $PATH
 end
 
+# Go
+if test -e $HOME/go/bin
+    set PATH $HOME/go/bin $PATH
+end
+
 # Dotnet
 if test -e $HOME/.dotnet
     set PATH $HOME/.dotnet $PATH
