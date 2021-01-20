@@ -1,4 +1,4 @@
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-html', 'coc-rust-analyzer', 'coc-go', 'coc-snippets']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-html', 'coc-rust-analyzer', 'coc-go', 'coc-snippets', 'coc-markdownlint']
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c

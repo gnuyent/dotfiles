@@ -11,6 +11,9 @@
 	"python.linting.flake8Path": "flake8",
 	"python.linting.mypyEnabled": true,
 	"python.formatting.provider": "black",
+	"markdownlint.config": {
+		"line-length": false
+	},
 	"languageserver": {
 		"ccls": {
 			"command": "ccls",

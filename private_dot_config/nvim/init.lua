@@ -2,12 +2,7 @@
 vim.g.mapleader = " "
 
 -- Load packer first
-require 'plugins.packer'
-
-require 'plugins.doge'
-require 'plugins.lualine'
-require 'plugins.treesitter'
-require 'plugins.vista'
+require 'plugins'
 
 require 'modules.mappings'
 require 'modules.settings'
