@@ -22,3 +22,8 @@ nnoremap <leader>5 m`^i##### <esc>``6l
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
+" Fix indentation
+setlocal tabstop=2
+setlocal softtabstop=2
+setlocal shiftwidth=2
+setlocal expandtab

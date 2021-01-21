@@ -4,37 +4,19 @@ local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
-  execute 'packadd packer.nvim'
 end
+
+execute 'packadd packer.nvim'
 
 -- Automatically recompile on file save
 execute('autocmd BufWritePost plugins.lua PackerCompile')
-
-vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
 	use {'wbthomason/packer.nvim', opt = true}
 
 	use {'christoomey/vim-tmux-navigator'}
 
-	use {
-		'hoob3rt/lualine.nvim',
-		requires = {
-			{'kyazdani42/nvim-web-devicons', opt=true}
-		},
-    config = function()
-      local lualine = require("lualine")
-      lualine.theme = 'forest_night'
-      lualine.status()
-    end
-	}
-
-	use {
-		'junegunn/fzf',
-		run = ":call fzf#install()",
-	}
-
-	use {'junegunn/fzf.vim'}
+	use {'melonmanchan/vim-tmux-resizer'}
 
 	use {
 		'kkoomen/vim-doge',
@@ -55,7 +37,7 @@ return require('packer').startup(function()
       -- instead of the default one for these filetypes when using `:Vista` without
       -- specifying the executive.
       vim.g.vista_executive_for = {
-       python = 'coc',
+        python = 'coc',
       }
 
       -- Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
@@ -72,13 +54,7 @@ return require('packer').startup(function()
     end
   }
 
-	use {'melonmanchan/vim-tmux-resizer'}
-
-	use {'neoclide/coc.nvim'}
-
-	use {'antoinemadec/coc-fzf'}
-
-	use {
+  use {
     'nvim-treesitter/nvim-treesitter',
     config = function()
       local ts_cfg = require("nvim-treesitter.configs")
@@ -86,21 +62,70 @@ return require('packer').startup(function()
       ts_cfg.setup {
           ensure_installed = "maintained",
           highlight = {
-        enable = true,
-        use_languagetree = true,
+            enable = true,
+            use_languagetree = true,
           },
           indent = {
-        enable = true,
+            enable = true,
           }
       }
     end
   }
 
+  -- Visuals
+	use {'sainnhe/forest-night'}
+
+	use {
+		'hoob3rt/lualine.nvim',
+		requires = {
+			{'kyazdani42/nvim-web-devicons'}
+		},
+    config = function()
+      local lualine = require("lualine")
+      lualine.theme = 'forest_night'
+      lualine.extensions = {'fzf'}
+      lualine.status()
+    end
+	}
+
 	use {'psliwka/vim-smoothie'}
+
+  -- Completion
+  use {'neoclide/coc.nvim'}
 
 	use {'rhysd/vim-clang-format'}
 
-	use {'sainnhe/forest-night'}
+  -- FZF
+	use {
+    'junegunn/fzf.vim',
+    requires = {
+      {
+        'junegunn/fzf',
+        run = ":call fzf#install()"
+      }
+    },
+    config = function()
+      -- Key Bindings
+      vim.api.nvim_set_keymap('n', '<C-p>', '<CMD>Files<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<C-g>', '<CMD>GFiles<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<C-b>', '<CMD>Buffers<CR>', { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<C-f>', '<CMD>Rg<CR>', { noremap = true, silent = true })
+
+      -- Floating window
+      -- https://github.com/junegunn/fzf.vim/issues/821#issuecomment-581273191
+      vim.g.fzf_layout = {
+        window = {
+          width = 0.9,
+          height = 0.6,
+          xoffset = 0.5,
+          highlight = 'Comment',
+          border = 'sharp'
+        }
+      }
+    end
+  }
+
+	use {'antoinemadec/coc-fzf'}
 
   -- Snippets
   use {'honza/vim-snippets'}
@@ -124,5 +149,23 @@ return require('packer').startup(function()
       vim.g.wiki_link_extension = '.md'
       vim.g.wiki_link_target_type = 'md'
     end
+  }
+
+  use {
+    'vim-pandoc/vim-pandoc',
+    config = function()
+      vim.g['pandoc#modules#disabled'] = {'folding'}
+      -- <leader>p to generate PDF.
+      vim.api.nvim_set_keymap('n', '<leader>p', '<CMD>Pandoc! pdf<CR>', { noremap = true, silent = true })
+    end,
+    ft = {'markdown', 'pandoc'}
+  }
+
+  use {
+    'vim-pandoc/vim-pandoc-syntax',
+    config = function()
+      vim.g['pandoc#syntax#conceal#urls'] = 1
+    end,
+    ft = {'markdown', 'pandoc'}
   }
 end)

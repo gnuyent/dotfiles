@@ -61,3 +61,6 @@ alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
 
 # ifconfig
 alias ifconfig='ip -c addr'
+
+# DNF upgrade
+alias up='sudo dnf upgrade --refresh --assumeyes'
