@@ -6,10 +6,10 @@ echo "Upgrading system..."
 sudo dnf upgrade -y
 
 echo "Installing development tools..."
-sudo dnf groupinstall -y @development-tools
+sudo dnf groupinstall -y "Development Tools"
 
 echo "Installing user packages..."
-sudo dnf install -y aria2c curl fish git golang npm openssl-devel ssh texlive-scheme-full tmux
+sudo dnf install -y aria2 curl fish git golang npm openssl-devel pandoc texlive-scheme-full tmux
 
 echo "Installing chezmoi..."
 curl -sfL https://git.io/chezmoi | sh
@@ -23,7 +23,13 @@ sh /tmp/rustup.sh -y
 
 ~/.cargo/bin/cargo install exa bat
 
-~/.cargo/bin/bat cache build
+~/.cargo/bin/bat cache --build
+
+mkdir -p ~/.local/bin
+
+echo "Installing rust-analyzer..."
+curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -o ~/.local/bin/rust-analyzer
+chmod +x ~/.local/bin/rust-analyzer
 
 echo "Cleaning up..."
 rm /tmp/rustup.sh

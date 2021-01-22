@@ -12,33 +12,26 @@ execute 'packadd packer.nvim'
 execute('autocmd BufWritePost plugins.lua PackerCompile')
 
 return require('packer').startup(function()
-	use {'wbthomason/packer.nvim', opt = true}
+  use {'wbthomason/packer.nvim', opt = true}
 
-	use {'christoomey/vim-tmux-navigator'}
+  use {'christoomey/vim-tmux-navigator'}
 
-	use {'melonmanchan/vim-tmux-resizer'}
+  use {'melonmanchan/vim-tmux-resizer'}
 
-	use {
-		'kkoomen/vim-doge',
-		run = ':call doge#install()',
+  use {
+    'kkoomen/vim-doge',
+    run = ':call doge#install()',
     config = function()
       vim.g.doge_doc_standard_python = 'google'
     end
-	}
+  }
 
-	use {
+  use {
     'liuchengxu/vista.vim',
     config = function()
       -- Executive used when opening vista sidebar without specifying it.
       -- See all the avaliable executives via `:echo g:vista#executives`.
       vim.g.vista_default_executive = 'coc'
-
-      -- Set the executive for some filetypes explicitly. Use the explicit executive
-      -- instead of the default one for these filetypes when using `:Vista` without
-      -- specifying the executive.
-      vim.g.vista_executive_for = {
-        python = 'coc',
-      }
 
       -- Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
       vim.g['vista#renderer#enable_icon'] = 1
@@ -60,43 +53,46 @@ return require('packer').startup(function()
       local ts_cfg = require("nvim-treesitter.configs")
 
       ts_cfg.setup {
-          ensure_installed = "maintained",
-          highlight = {
-            enable = true,
-            use_languagetree = true,
-          },
-          indent = {
-            enable = true,
-          }
+        ensure_installed = "maintained",
+        highlight = {
+          enable = true,
+          use_languagetree = true,
+        },
+        indent = {
+          enable = true,
+        }
       }
     end
   }
 
   -- Visuals
-	use {'sainnhe/forest-night'}
+  use {'sainnhe/forest-night'}
 
-	use {
-		'hoob3rt/lualine.nvim',
-		requires = {
-			{'kyazdani42/nvim-web-devicons'}
-		},
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = {
+      {'kyazdani42/nvim-web-devicons'}
+    },
     config = function()
       local lualine = require("lualine")
       lualine.theme = 'forest_night'
       lualine.extensions = {'fzf'}
       lualine.status()
     end
-	}
+  }
 
-	use {'psliwka/vim-smoothie'}
+  use {'psliwka/vim-smoothie'}
 
   -- Completion
   use {'neoclide/coc.nvim'}
 
-	use {'rhysd/vim-clang-format'}
+  use {'rhysd/vim-clang-format'}
+
+  -- Snippets
+  use {'honza/vim-snippets'}
 
   -- FZF
-	use {
+  use {
     'junegunn/fzf.vim',
     requires = {
       {
@@ -124,11 +120,6 @@ return require('packer').startup(function()
       }
     end
   }
-
-	use {'antoinemadec/coc-fzf'}
-
-  -- Snippets
-  use {'honza/vim-snippets'}
 
   -- Markdown
   use {
