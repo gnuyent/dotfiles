@@ -16,7 +16,12 @@ return require('packer').startup(function()
 
   use {'christoomey/vim-tmux-navigator'}
 
-  use {'melonmanchan/vim-tmux-resizer'}
+  use {
+    'RyanMillerC/better-vim-tmux-resizer',
+    config = function()
+      vim.g.tmux_navigator_save_on_switch = 1
+    end
+  }
 
   use {
     'kkoomen/vim-doge',
@@ -65,7 +70,9 @@ return require('packer').startup(function()
     end
   }
 
+  ----------------------------------------
   -- Visuals
+  ----------------------------------------
   use {'sainnhe/forest-night'}
 
   use {
@@ -83,15 +90,34 @@ return require('packer').startup(function()
 
   use {'psliwka/vim-smoothie'}
 
+  ----------------------------------------
   -- Completion
-  use {'neoclide/coc.nvim'}
+  ----------------------------------------
+  use {
+    'neoclide/coc.nvim',
+    config = function()
+      vim.g.coc_global_extensions = {
+        'coc-go',
+        'coc-html',
+        'coc-json',
+        'coc-markdownlint',
+        'coc-pyright',
+        'coc-rust-analyzer',
+        'coc-snippets',
+      }
+    end
+  }
 
   use {'rhysd/vim-clang-format'}
 
+  ----------------------------------------
   -- Snippets
+  ----------------------------------------
   use {'honza/vim-snippets'}
 
+  ----------------------------------------
   -- FZF
+  ----------------------------------------
   use {
     'junegunn/fzf.vim',
     requires = {
@@ -121,21 +147,14 @@ return require('packer').startup(function()
     end
   }
 
-  -- Markdown
-  use {
-    'junegunn/goyo.vim',
-    ft = {'markdown'}
-  }
-
-  use {
-    'junegunn/limelight.vim',
-    ft = {'markdown'}
-  }
-
+  ----------------------------------------
+  -- Markdown/Notetaking
+  ----------------------------------------
   use {
     'lervag/wiki.vim',
     config = function()
       vim.g.wiki_root = '~/notes'
+      -- Avoid .wiki filetypes
       vim.g.wiki_filetypes = {'md'}
       vim.g.wiki_link_extension = '.md'
       vim.g.wiki_link_target_type = 'md'
@@ -157,6 +176,23 @@ return require('packer').startup(function()
     config = function()
       vim.g['pandoc#syntax#conceal#urls'] = 1
     end,
+    ft = {'markdown', 'pandoc'}
+  }
+
+  use {
+    'iamcco/markdown-preview.nvim',
+    run = 'cd app && yarn install',
+    config = function()
+      -- CTRL+p to toggle markdown preview.
+      -- Note: calling <Plug>MarkdownPreviewToggle doesn't seem to work...
+      vim.api.nvim_set_keymap('n', '<C-p>', '<CMD>call mkdp#util#toggle_preview()<CR>', { noremap = true, silent = true })
+      vim.g.mkdp_filetypes = {'markdown', 'pandoc'}
+    end,
+    ft = {'markdown', 'pandoc'}
+  }
+
+  use {
+    'dhruvasagar/vim-table-mode',
     ft = {'markdown', 'pandoc'}
   }
 end)

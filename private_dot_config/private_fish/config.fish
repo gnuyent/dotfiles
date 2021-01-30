@@ -7,10 +7,6 @@ if test -e $HOME/.local/bin
     set PATH $HOME/.local/bin $PATH
 end
 
-if test -e $HOME/bin
-    set PATH $HOME/bin $PATH
-end
-
 # Rust
 if test -e $HOME/.cargo/bin
     set PATH $HOME/.cargo/bin $PATH

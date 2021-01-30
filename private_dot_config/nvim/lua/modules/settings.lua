@@ -21,6 +21,7 @@ cmd("augroup END")
 
 local options = {
   -- Boolean values
+  autochdir = true, -- Change cwd on buffer change
   autowrite = true, -- Automatically write buffers when not focused
   hidden = true, -- TextEdit might fail if hidden is not set
 

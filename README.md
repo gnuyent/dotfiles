@@ -10,6 +10,7 @@ Terminal:
 * Windows - [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-terminal-preview/)
 
 * [fish nightly](https://github.com/fish-shell/fish-shell)
+  * [fisher](https://github.com/jorgebucaran/fisher)
 * [neovim](https://github.com/neovim/neovim)
   * [packer.nvim](https://github.com/wbthomason/packer.nvim)
   * [forest-night](https://github.com/neoclide/coc.nvim)
