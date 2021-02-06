@@ -21,7 +21,6 @@ cmd("augroup END")
 
 local options = {
   -- Boolean values
-  autochdir = true, -- Change cwd on buffer change
   autowrite = true, -- Automatically write buffers when not focused
   hidden = true, -- TextEdit might fail if hidden is not set
 
@@ -37,6 +36,8 @@ local options = {
   backup = false, -- disable backup
   writebackup = false, -- disable write backup
 
+  showmode = false, -- Hide mode text because statusline does it already
+
   -- String values
   encoding = "UTF-8", -- set encoding to UTF-8
   mouse = "a", -- Enable mouse mode
@@ -47,7 +48,8 @@ local options = {
   updatetime = 200, -- 200ms
 }
 
-cmd("colorscheme forest-night")
+cmd("set background=dark")
+cmd("colorscheme gruvbox-material")
 -- Filetype plugins
 cmd("filetype plugin indent on")
 

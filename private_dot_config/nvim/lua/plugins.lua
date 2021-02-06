@@ -14,6 +14,9 @@ execute('autocmd BufWritePost plugins.lua PackerCompile')
 return require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
+  ----------------------------------------
+  -- tmux + nvim
+  ----------------------------------------
   use {'christoomey/vim-tmux-navigator'}
 
   use {
@@ -24,40 +27,11 @@ return require('packer').startup(function()
   }
 
   use {
-    'kkoomen/vim-doge',
-    run = ':call doge#install()',
-    config = function()
-      vim.g.doge_doc_standard_python = 'google'
-    end
-  }
-
-  use {
-    'liuchengxu/vista.vim',
-    config = function()
-      -- Executive used when opening vista sidebar without specifying it.
-      -- See all the avaliable executives via `:echo g:vista#executives`.
-      vim.g.vista_default_executive = 'coc'
-
-      -- Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
-      vim.g['vista#renderer#enable_icon'] = 1
-
-      -- Don't navigate to vista window on open
-      vim.g.vista_stay_on_open = 0
-
-      -- Decrease delay
-      vim.g.vista_update_on_text_changed_delay = 100
-
-      -- Vista hotkey
-      vim.api.nvim_set_keymap('n', '<leader>v', '<CMD>Vista!!<CR>', { noremap = true, silent = true })
-    end
-  }
-
-  use {
     'nvim-treesitter/nvim-treesitter',
     config = function()
-      local ts_cfg = require("nvim-treesitter.configs")
+      local ts = require("nvim-treesitter.configs")
 
-      ts_cfg.setup {
+      ts.setup {
         ensure_installed = "maintained",
         highlight = {
           enable = true,
@@ -73,17 +47,15 @@ return require('packer').startup(function()
   ----------------------------------------
   -- Visuals
   ----------------------------------------
-  use {'sainnhe/forest-night'}
+  use {'sainnhe/gruvbox-material'}
 
   use {
-    'hoob3rt/lualine.nvim',
-    requires = {
-      {'kyazdani42/nvim-web-devicons'}
-    },
+    --'hoob3rt/lualine.nvim',
+    '~/Projects/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
     config = function()
-      local lualine = require("lualine")
-      lualine.theme = 'forest_night'
-      lualine.extensions = {'fzf'}
+      local lualine = require('lualine')
+      lualine.theme = 'gruvbox_material'
       lualine.status()
     end
   }
@@ -94,29 +66,89 @@ return require('packer').startup(function()
   -- Completion
   ----------------------------------------
   use {
-    'neoclide/coc.nvim',
+    'neovim/nvim-lspconfig',
     config = function()
-      vim.g.coc_global_extensions = {
-        'coc-go',
-        'coc-html',
-        'coc-json',
-        'coc-markdownlint',
-        'coc-pyright',
-        'coc-rust-analyzer',
-        'coc-snippets',
+      local lspconfig = require'lspconfig'
+      -- LSP Configurations
+      -- Go
+      lspconfig.gopls.setup{}
+
+      -- Rust
+      lspconfig.rust_analyzer.setup{
+        root_dir = lspconfig.util.root_pattern('Cargo.toml', 'rust-project.json'),
+        on_attach = require'completion'.on_attach
       }
     end
   }
 
-  use {'rhysd/vim-clang-format'}
+  use {
+    'nvim-lua/completion-nvim',
+    requires = {
+      {
+        'SirVer/ultisnips',
+        config = function()
+          vim.g.UltiSnipsExpandTrigger = '<Plug>(placeholder)'
+          vim.g.UltiSnipsJumpForwardTrigger = '<tab>'
+          vim.g.UltiSnipsJumpBackwardTrigger = '<s-tab>'
+        end
+      },
+      {'honza/vim-snippets'}
+    },
+    config = function()
+      -- Use <Tab> and <S-Tab> to navigate through popup menu
+      vim.cmd('inoremap <expr> <Tab>   pumvisible() ? "\\<C-n>" : "\\<Tab>"')
+      vim.cmd('inoremap <expr> <S-Tab> pumvisible() ? "\\<C-p>" : "\\<S-Tab>"')
+
+      -- Set completeopt to have a better completion experience
+      vim.cmd('set completeopt=menuone,noinsert,noselect')
+
+      -- Avoid showing message extra message when using completion
+      vim.cmd('set shortmess+=c')
+
+      vim.g.completion_enable_snippet = 'UltiSnips'
+    end
+  }
+
+  use {
+    'glepnir/lspsaga.nvim',
+    config = function()
+      local saga = require 'lspsaga'
+      local map = vim.api.nvim_set_keymap
+
+      saga.init_lsp_saga()
+
+      -- lsp provider to find the cursor word definition and reference
+      map('n', 'gr', ":Lspsaga lsp_finder<CR>", { noremap = true, silent = true })
+
+      -- code action
+      map('n', '<leader>ca', ":Lspsaga code_action<CR>", { noremap = true, silent = true })
+      map('v', '<leader>ca', ":<C-U>Lspsaga range_code_action<CR>", { noremap = true, silent = true })
+
+      -- show hover doc
+      map('n', 'K', ":Lspsaga hover_doc<CR>", { noremap = true, silent = true })
+
+      -- show signature help
+      map('n', 'gs', ":Lspsaga signature_help<CR>", { noremap = true, silent = true })
+
+      -- rename
+      map('n', '<leader>rn', ":Lspsaga rename<CR>", { noremap = true, silent = true })
+
+      -- preview definition
+      map('n', 'gd', ":Lspsaga preview_definition<CR>", { noremap = true, silent = true })
+
+      -- show diagnostics
+      map('n', '<leader>a', ":Lspsaga show_line_diagnostics<CR>", { noremap = true, silent = true })
+
+      -- next diagnostic
+      map('n', ']g', ":Lspsaga diagnostic_jump_next<CR>", { noremap = true, silent = true })
+
+      -- previous diagnostic
+      map('n', '[g', ":Lspsaga diagnostic_jump_prev<CR>", { noremap = true, silent = true })
+    end
+  }
 
   ----------------------------------------
-  -- Snippets
-  ----------------------------------------
-  use {'honza/vim-snippets'}
-
-  ----------------------------------------
-  -- FZF
+  -- Utilities
   ----------------------------------------
   use {
     'junegunn/fzf.vim',
@@ -146,6 +178,37 @@ return require('packer').startup(function()
       }
     end
   }
+
+  use {
+    'liuchengxu/vista.vim',
+    config = function()
+      -- Executive used when opening vista sidebar without specifying it.
+      -- See all the avaliable executives via `:echo g:vista#executives`.
+      vim.g.vista_default_executive = 'nvim_lsp'
+
+      -- Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+      vim.g['vista#renderer#enable_icon'] = 1
+
+      -- Don't navigate to vista window on open
+      vim.g.vista_stay_on_open = 0
+
+      -- Decrease delay
+      vim.g.vista_update_on_text_changed_delay = 100
+
+      -- Vista hotkey
+      vim.api.nvim_set_keymap('n', '<leader>v', '<CMD>Vista!!<CR>', { noremap = true, silent = true })
+    end
+  }
+
+  use {
+    'kkoomen/vim-doge',
+    run = ':call doge#install()',
+    config = function()
+      vim.g.doge_doc_standard_python = 'google'
+    end
+  }
+
+  use {'tpope/vim-fugitive'}
 
   ----------------------------------------
   -- Markdown/Notetaking
@@ -188,11 +251,6 @@ return require('packer').startup(function()
       vim.api.nvim_set_keymap('n', '<C-p>', '<CMD>call mkdp#util#toggle_preview()<CR>', { noremap = true, silent = true })
       vim.g.mkdp_filetypes = {'markdown', 'pandoc'}
     end,
-    ft = {'markdown', 'pandoc'}
-  }
-
-  use {
-    'dhruvasagar/vim-table-mode',
     ft = {'markdown', 'pandoc'}
   }
 end)
