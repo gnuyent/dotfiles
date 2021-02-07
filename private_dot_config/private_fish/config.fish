@@ -1,5 +1,6 @@
 set --export SHELL /usr/bin/fish
 set --export EDITOR nvim
+# TODO: Update bat theme
 set --export BAT_THEME "ForestNightItalics"
 
 # Custom bin
@@ -24,7 +25,9 @@ end
 
 # cowsay
 function fish_greeting
-    fortune | cowsay
+	if type -q fortune && type -q cowsay
+		fortune | cowsay
+	end
 end
 
 # ctrl+z
@@ -36,29 +39,41 @@ end
 set --export Z_CMD "j"
 
 # ls
-alias ls='exa --icons'
-alias la='exa -a --icons'
-alias ll='exa -l --icons'
-alias lal='exa -l -a --icons'
+if type -q exa
+	alias ls='exa --icons'
+	alias la='exa -a --icons'
+	alias ll='exa -l --icons'
+	alias lal='exa -l -a --icons'
+end
 
 # git
 alias gcl='git clone'
 alias gcm='git commit -m'
 
 # grep
-alias grep='rg'
+if type -q rg
+	alias grep='rg'
+end
 
 # cat
-alias cat='bat -p'
+if type -q bat
+	alias cat='bat -p'
+end
 
 # vim
-alias vi='nvim --noplugin'
-alias vim='nvim'
+if type -q nvim
+	alias vi='nvim --noplugin'
+	alias vim='nvim'
+end
 # c(hezmoi)vim
-alias cvim='chezmoi edit --apply'
+if type -q chezmoi
+	alias cvim='chezmoi edit --apply'
+end
 
 # tmux
-alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
+if type -q tmux
+	alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
+end
 
 # ifconfig
 alias ifconfig='ip -c addr'
@@ -67,20 +82,36 @@ alias ifconfig='ip -c addr'
 abbr --add up 'sudo dnf upgrade --refresh --assumeyes'
 
 function rust_analyzer_check_update
+	if not type -q rg
+		echo "ripgrep is not installed. Not installing rust-analyzer."
+		return 1
+	end
 	set latest_version (curl -sL https://github.com/rust-analyzer/rust-analyzer/releases/latest | grep -o -P -m 1 '(?<=<code>).*(?=</code>)')
-	set local_version (rust-analyzer --version | grep -o --pcre2 '(?<= )(.*)')
+	if type -q rust-analyzer
+		set local_version (rust-analyzer --version | grep -o --pcre2 '(?<= )(.*)')
+		set text "Updat"
+	else
+		set local_version ""
+		set text "Install"
+	end
 
 	if test $latest_version = $local_version
 		echo "Latest version of rust-analyzer ($local_version) is up to date."
 	else
-		echo "Updating rust-analyzer..."
-		wget https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -O ~/.local/bin/rust-analyzer --quiet
+		echo $text"ing rust-analyzer..."
+		mkdir -p ~/.local/bin/
+		curl -sL https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-linux -o ~/.local/bin/rust-analyzer
 		chmod +x ~/.local/bin/rust-analyzer
-		echo "Updated rust-analyzer from $local_version to $latest_version!"
+		if test $text = "Install"
+			echo "Installed rust-analyzer ($latest_version)!"
+		else
+			echo "Updated rust-analyzer from $local_version to $latest_version!"
+		end
 	end
 
 	set -e local_version
 	set -e latest_version
+	set -e text
 end
 alias upra='rust_analyzer_check_update'
 
