@@ -13,8 +13,10 @@ Terminal:
   * [fisher](https://github.com/jorgebucaran/fisher)
 * [neovim](https://github.com/neovim/neovim)
   * [packer.nvim](https://github.com/wbthomason/packer.nvim)
-  * [forest-night](https://github.com/neoclide/coc.nvim)
-  * [coc](https://github.com/neoclide/coc.nvim)
+  * [gruvbox-material](https://github.com/sainnhe/gruvbox-material)
+  * nvim-lsp
+  * [lualine](https://github.com/hoob3rt/lualine.nvim)
 * [bat](https://github.com/sharkdp/bat)
 * [exa](https://github.com/ogham/exa)
+* [ripgrep](https://github.com/BurntSushi/ripgrep)
 * [tmux](https://github.com/tmux/tmux)
