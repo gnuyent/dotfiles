@@ -52,5 +52,6 @@ cmd("set background=dark")
 cmd("colorscheme gruvbox-material")
 -- Filetype plugins
 cmd("filetype plugin indent on")
+cmd("set clipboard=unnamedplus")
 
 apply_options(options)
