@@ -64,10 +64,6 @@ if type -q nvim
 	alias vi='nvim --noplugin'
 	alias vim='nvim'
 end
-# c(hezmoi)vim
-if type -q chezmoi
-	abbr --add cvim 'chezmoi edit --apply'
-end
 
 # tmux
 if type -q tmux
@@ -87,5 +83,11 @@ abbr --add ip 'curl https://ipecho.net/plain ; echo'
 # Clear
 abbr --add c 'clear'
 
-# Chezmoi add+commit
-abbr --add cpush 'chezmoi git add . && chezmoi git commit && chezmoi git push'
+if type -q chezmoi
+	# c(hezmoi)vim
+	abbr --add cvim 'chezmoi edit --apply'
+	# Chezmoi git add+commit+push
+	abbr --add cpush 'chezmoi git add . && chezmoi git commit && chezmoi git push'
+	# Chezmoi add file
+	abbr --add cadd 'chezmoi add'
+end
