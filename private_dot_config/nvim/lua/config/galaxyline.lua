@@ -3,7 +3,7 @@ local gls = gl.section
 local cmd = vim.api.nvim_command
 local my_icons = require('galaxyline.provider_fileinfo').define_file_icon()
 
-gl.short_line_list = {'NvimTree', 'vista', 'vista_kind', 'packer'}
+gl.short_line_list = {'vista', 'vista_kind', 'packer'}
 
 my_icons['packer'] = {'#D2B48C', ''}
 
@@ -117,21 +117,27 @@ gls.left[1] = {
   },
 }
 
-
-gls.left[4] ={
+gls.left[2] ={
   FileIcon = {
     provider = {function() return '  ' end, 'FileIcon'},
     condition = buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.bg},
+    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color, colors.bg},
   },
 }
 
-gls.left[5] = {
+gls.left[3] = {
   FileName = {
     provider = {'FileName'},
     condition = buffer_not_empty,
     highlight = {colors.fg, colors.bg, 'bold'}
   }
+}
+
+gls.left[4] = {
+    Space = {
+        provider = function() return ' ' end,
+        highlight = {colors.section_bg, colors.bg}
+    }
 }
 
 -- Right Half
@@ -235,7 +241,7 @@ gls.right[12] = {
 }
 
 -- Inactive panes
-gls.short_line_left[0] ={
+gls.short_line_left[1] ={
   FileIcon = {
     provider = {function() return '  ' end, 'FileIcon'},
     condition = buffer_not_empty,
@@ -243,7 +249,7 @@ gls.short_line_left[0] ={
   },
 }
 
-gls.short_line_left[1] = {
+gls.short_line_left[2] = {
   FileName = {
     provider = 'FileName',
     condition = buffer_not_empty,

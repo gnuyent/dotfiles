@@ -32,11 +32,6 @@ return require('packer').startup(function()
 
   use {'kyazdani42/nvim-web-devicons'}
 
-  --use {
-  --  'hoob3rt/lualine.nvim',
-  --  config = [[require('config.lualine')]]
-  --}
-
   use {
     'glepnir/galaxyline.nvim',
     config = [[require('config.galaxyline')]]
