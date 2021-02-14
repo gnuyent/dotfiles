@@ -1,6 +1,6 @@
 # `gnuyent's dotfiles`
 
-![](img/1.png)
+![](images/1.png)
 
 ## Overview
 
