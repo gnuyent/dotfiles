@@ -1,5 +1,7 @@
 # `gnuyent's dotfiles`
 
+![](img/1.png)
+
 ## Overview
 
 Colors: [gruvbox-material](https://github.com/sainnhe/gruvbox-material) - A modified version of [Gruvbox](https://github.com/morhetz/gruvbox), the contrast is adjusted to be softer in order to protect developers' eyes.
