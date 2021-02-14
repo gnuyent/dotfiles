@@ -42,7 +42,7 @@ if type -q exa
 	alias ls='exa --icons'
 	alias la='exa -a --icons'
 	alias ll='exa -l --icons'
-	alias lal='exa -l -a --icons'
+	alias lla='exa -l -a --icons'
 end
 
 # git
@@ -66,7 +66,7 @@ if type -q nvim
 end
 # c(hezmoi)vim
 if type -q chezmoi
-	alias cvim='chezmoi edit --apply'
+	abbr --add cvim 'chezmoi edit --apply'
 end
 
 # tmux
@@ -83,3 +83,9 @@ abbr --add upra 'rust_analyzer_check_update'
 
 # Get current ip
 abbr --add ip 'curl https://ipecho.net/plain ; echo'
+
+# Clear
+abbr --add c 'clear'
+
+# Chezmoi add+commit
+abbr --add cpush 'chezmoi git add . && chezmoi git commit && chezmoi git push'
