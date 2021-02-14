@@ -10,8 +10,9 @@ Font: [FiraCode Nerd Font Complete Mono](https://github.com/ryanoasis/nerd-fonts
 
 Terminal:
 
-* Linux: [Alacritty](https://github.com/alacritty/alacritty) - A GPU-accelerated, modern terminal emulator that comes with sensible defaults and allows for extensive configuration.
-* Windows: [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-terminal-preview/) - A new, modern, feature-rich, productive terminal application for command-line users.
+Linux: [Alacritty](https://github.com/alacritty/alacritty) - A GPU-accelerated, modern terminal emulator that comes with sensible defaults and allows for extensive configuration.
+
+Windows: [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-terminal-preview/) - A new, modern, feature-rich, productive terminal application for command-line users.
 
 * [fish nightly](https://github.com/fish-shell/fish-shell) - A smart and user-friendly command line shell for macOS, Linux, and the rest of the family.
   * [fisher](https://github.com/jorgebucaran/fisher) - A function, completion, binding, and snippet manager for the fish shell.
