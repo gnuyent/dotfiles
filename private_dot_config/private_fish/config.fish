@@ -1,7 +1,6 @@
 set --export SHELL /usr/bin/fish
 set --export EDITOR nvim
-# TODO: Update bat theme
-set --export BAT_THEME "ForestNightItalics"
+set --export BAT_THEME "gruvbox"
 
 # Custom bin
 if test -e $HOME/.local/bin

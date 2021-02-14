@@ -19,6 +19,11 @@ cmd("autocmd BufEnter,FocusGained,InsertLeave * set relativenumber")
 cmd("autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber")
 cmd("augroup END")
 
+-- Enable true colors if supported by terminal.
+if vim.fn.has('nvim') == 1 then
+  vim.o.termguicolors = true
+end
+
 local options = {
   -- Boolean values
   autowrite = true, -- Automatically write buffers when not focused
@@ -30,7 +35,6 @@ local options = {
   number = true, -- line numbers
   relativenumber = true, -- relative line numbers
 
-  termguicolors = true, -- true colors
   wrap = false, -- disable line wrapping
 
   backup = false, -- disable backup
@@ -45,13 +49,14 @@ local options = {
 
   -- Number values
   cmdheight = 1, -- Space for message displays
-  updatetime = 200, -- 200ms
+  updatetime = 100, -- 100ms
 }
 
-cmd("set background=dark")
+apply_options(options)
+
+vim.o.background = "dark"
 cmd("colorscheme gruvbox-material")
 -- Filetype plugins
 cmd("filetype plugin indent on")
-cmd("set clipboard=unnamedplus")
-
-apply_options(options)
+-- Use system clipboard
+vim.o.clipboard = "unnamedplus"
