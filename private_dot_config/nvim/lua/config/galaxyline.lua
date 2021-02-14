@@ -5,8 +5,6 @@ local my_icons = require('galaxyline.provider_fileinfo').define_file_icon()
 
 gl.short_line_list = {'vista', 'vista_kind', 'packer'}
 
-my_icons['packer'] = {'#D2B48C', ''}
-
 local colors = {
   bg = "#282828",
   black = "#665C54",
@@ -27,6 +25,9 @@ local colors = {
   white = "#D4BE98",
   yellow = "#D8A657"
 }
+
+my_icons['packer'] = {'#D2B48C', ''}
+my_icons['gitcommit'] = {colors.cyan, ''}
 
 -- Helper Functions
 local buffer_not_empty = function()
