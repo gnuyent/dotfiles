@@ -93,3 +93,13 @@ if type -q chezmoi
 	# Chezmoi add file
 	abbr --add cadd 'chezmoi add'
 end
+
+# Hash check helpers
+if type -q sha256sum
+	abbr --add sha256 'hash_check_sha256'
+end
+
+if type -q md5sum
+	abbr --add md5 'hash_check_md5'
+end
+
