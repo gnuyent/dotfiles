@@ -135,7 +135,7 @@ gls.left[3] = {
 }
 
 gls.left[4] = {
-    Whitespace = {
+    Space = {
         provider = function() return ' ' end,
         highlight = {colors.bg, colors.bg}
     }
@@ -176,7 +176,7 @@ gls.right[4] = {
 gls.right[5] = {
   GitIcon = {
     provider = function() return '   ' end,
-    condition = require('galaxyline.provider_vcs').check_git_workspace,
+    condition = require('galaxyline.condition').check_git_workspace,
     highlight = {colors.fg, colors.bg, 'bold'},
   }
 }
@@ -184,7 +184,7 @@ gls.right[5] = {
 gls.right[6] = {
   GitBranch = {
     provider = 'GitBranch',
-    condition = require('galaxyline.provider_vcs').check_git_workspace,
+    condition = require('galaxyline.condition').check_git_workspace,
     highlight = {colors.fg, colors.bg, 'bold'},
   }
 }

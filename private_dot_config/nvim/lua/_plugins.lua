@@ -100,7 +100,8 @@ return require('packer').startup(function()
   ----------------------------------------
   use {
     'lervag/wiki.vim',
-    config = [[require('config.wiki')]]
+    config = [[require('config.wiki')]],
+    ft = {'markdown', 'pandoc'}
   }
 
   use {
