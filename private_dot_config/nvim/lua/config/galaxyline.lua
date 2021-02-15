@@ -135,9 +135,9 @@ gls.left[3] = {
 }
 
 gls.left[4] = {
-    Space = {
+    Whitespace = {
         provider = function() return ' ' end,
-        highlight = {colors.section_bg, colors.bg}
+        highlight = {colors.bg, colors.bg}
     }
 }
 
