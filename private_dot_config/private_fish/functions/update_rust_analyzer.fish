@@ -1,11 +1,11 @@
-function rust_analyzer_check_update
+function update_rust_analyzer
 	if not type -q rg
 		echo "ripgrep is not installed. Not installing rust-analyzer."
 		return 1
 	end
-	set latest_version (curl -sL https://github.com/rust-analyzer/rust-analyzer/releases/latest | grep -o -P -m 1 '(?<=<code>).*(?=</code>)')
+	set latest_version (curl -sL https://github.com/rust-analyzer/rust-analyzer/releases/latest | rg -o -P -m 1 '(?<=<code>).*(?=</code>)')
 	if type -q rust-analyzer
-		set local_version (rust-analyzer --version | grep -o --pcre2 '(?<= )(.*)')
+		set local_version (rust-analyzer --version | rg -o --pcre2 '(?<= )(.*)')
 		set text "Updat"
 	else
 		set local_version ""

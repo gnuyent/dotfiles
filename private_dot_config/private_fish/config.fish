@@ -46,8 +46,10 @@ if type -q exa
 end
 
 # git
-abbr --add gcl 'git clone'
-abbr --add gcm 'git commit -m'
+if type -q git
+	abbr --add gcl 'git clone'
+	abbr --add gcm 'git commit -m'
+end
 
 # grep
 if type -q rg
@@ -75,7 +77,7 @@ abbr --add ifconfig 'ip -c addr'
 
 # DNF upgrade
 abbr --add up 'sudo dnf upgrade --refresh --assumeyes'
-abbr --add upra 'rust_analyzer_check_update'
+abbr --add upra 'update_rust_analyzer'
 
 # Get current ip
 abbr --add ip 'curl https://ipecho.net/plain ; echo'
