@@ -27,7 +27,7 @@ local colors = {
 }
 
 my_icons['packer'] = {'#D2B48C', ''}
-my_icons['gitcommit'] = {colors.cyan, ''}
+my_icons['man'] = {colors.white, ''}
 
 -- Helper Functions
 local buffer_not_empty = function()
@@ -128,7 +128,7 @@ gls.left[2] ={
 
 gls.left[3] = {
   FileName = {
-    provider = {'FileName'},
+    provider = {get_current_file_name, file_readonly},
     condition = buffer_not_empty,
     highlight = {colors.fg, colors.bg, 'bold'}
   }
@@ -193,7 +193,7 @@ gls.right[7] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = checkwidth,
-    icon = ' +',
+    icon = '+',
     highlight = {colors.green,colors.bg},
   }
 }
@@ -202,7 +202,7 @@ gls.right[8] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = checkwidth,
-    icon = ' ~',
+    icon = '~',
     highlight = {colors.yellow,colors.bg},
   }
 }
@@ -211,7 +211,7 @@ gls.right[9] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = checkwidth,
-    icon = ' -',
+    icon = '-',
     highlight = {colors.red,colors.bg},
   }
 }

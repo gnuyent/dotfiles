@@ -37,6 +37,9 @@ local on_attach = function(client)
 end
 
 -- LSP Configurations
+-- Bash
+lspconfig.bashls.setup{}
+
 -- Go
 lspconfig.gopls.setup{
   capabilities = capabilities

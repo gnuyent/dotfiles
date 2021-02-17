@@ -22,7 +22,7 @@ function update_rust_analyzer
 		if test $text = "Install"
 			echo "Installed rust-analyzer ($latest_version)!"
 		else
-			echo "Updated rust-analyzer from $local_version to $latest_version!"
+			echo "Updated rust-analyzer! ($local_version -> $latest_version)"
 		end
 	end
 
