@@ -46,12 +46,6 @@ set RUST_PACKAGES \
 #################################################
 # Setup
 #################################################
-# Checks if SSH key exists. Needed for git work.
-if not test -e ~/.ssh/id_rsa
-	echo "SSH key not found. Make sure it is in the correct location!"
-	exit 1
-end
-
 # Helper function to confirm/deny.
 function read_confirm --description "Ask the user for confirmation" --argument prompt
 	if test -z "$prompt"
@@ -97,6 +91,14 @@ function copy_ssh --description "Copy SSH keys to SSH key directory."
 		echo "Invalid directory specified!"
 		exit 1
 	end
+end
+
+copy_ssh
+
+# Checks if SSH key exists. Needed for git work.
+if not test -e ~/.ssh/id_rsa
+	echo "SSH key not found. Make sure it is in the correct location!"
+	exit 1
 end
 
 function os_check --description "Determine OS."
@@ -223,7 +225,6 @@ end
 #################################################
 function main
 	clear
-	copy_ssh
 	os_check
 	switch $UNAME
 		case Fedora
