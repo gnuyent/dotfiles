@@ -25,6 +25,7 @@ set DNF_PACKAGES \
 	"fish" \
 	"git" \
 	"golang" \
+	"neovim" \
 	"npm" \
 	"openssl-devel" \
 	"pandoc" \
