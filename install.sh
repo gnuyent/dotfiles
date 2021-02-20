@@ -1,5 +1,7 @@
 #!/bin/fish
 
+set ARGUMENTS $argv
+
 # APT packages to install.
 set APT_PACKAGES \
 	"aria2" \
@@ -48,6 +50,53 @@ set RUST_PACKAGES \
 if not test -e ~/.ssh/id_rsa
 	echo "SSH key not found. Make sure it is in the correct location!"
 	exit 1
+end
+
+# Helper function to confirm/deny.
+function read_confirm --description "Ask the user for confirmation" --argument prompt
+	if test -z "$prompt"
+		set prompt "Continue?"
+	end
+
+	while true
+		read -p 'echo -n "$prompt [y/N]: "' -l confirm
+
+		switch $confirm
+			case Y y
+				return 0
+			case '' N n
+				return 1
+		end
+	end
+end
+
+# Copy SSH keys to SSH user directory.
+function copy_ssh --description "Copy SSH keys to SSH key directory."
+	if test (count $ARGUMENTS) -eq 1; and test -d $ARGUMENTS[1]; and test -e $ARGUMENTS[1]/id_rsa; and test -e $ARGUMENTS[1]/id_rsa.pub
+		set SSH_DIR $ARGUMENTS[1]
+		set LOCAL_SSH_DIR ~/.ssh
+
+		if test -d $LOCAL_SSH_DIR; and test -e ~/.ssh/id_rsa; and test -e ~/.ssh/id_rsa.pub
+			if not read_confirm "Overwrite SSH keys?"
+				return 1
+			end
+		end
+
+		# Copy files over
+		mkdir --parents $LOCAL_SSH_DIR
+		cp $SSH_DIR/id_rsa $LOCAL_SSH_DIR/id_rsa
+		cp $SSH_DIR/id_rsa.pub $LOCAL_SSH_DIR/id_rsa.pub
+
+		# Set SSH key permissions
+		chmod 700 $LOCAL_SSH_DIR
+		chmod 600 $LOCAL_SSH_DIR/id_rsa
+		chmod 644 $LOCAL_SSH_DIR/id_rsa.pub
+
+		echo "Copied SSH keys to $LOCAL_SSH_DIR."
+	else
+		echo "Invalid directory specified!"
+		exit 1
+	end
 end
 
 function os_check --description "Determine OS."
@@ -174,6 +223,7 @@ end
 #################################################
 function main
 	clear
+	copy_ssh
 	os_check
 	switch $UNAME
 		case Fedora
@@ -190,6 +240,7 @@ function main
 	poetry_install
 	rust_install
 	rust_install_packages
+	rust_analyzer_install
 end
 
 main
