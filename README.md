@@ -4,11 +4,13 @@
 
 ## Overview
 
-Colors: [gruvbox-material](https://github.com/sainnhe/gruvbox-material) - A modified version of [Gruvbox](https://github.com/morhetz/gruvbox), the contrast is adjusted to be softer in order to protect developers' eyes.
+### Colors
+[gruvbox-material](https://github.com/sainnhe/gruvbox-material) - A modified version of [Gruvbox](https://github.com/morhetz/gruvbox), the contrast is adjusted to be softer in order to protect developers' eyes.
 
-Font: [FiraCode Nerd Font Complete Mono](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode/Regular/complete) - A free monospaced font containing ligatures for common programming multi-character combinations.
+### Font
+[FiraCode Nerd Font Complete Mono](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode/Regular/complete) - A free monospaced font containing ligatures for common programming multi-character combinations.
 
-Terminal:
+### Terminal
 
 Linux: [Alacritty](https://github.com/alacritty/alacritty) - A GPU-accelerated, modern terminal emulator that comes with sensible defaults and allows for extensive configuration.
 
@@ -51,3 +53,9 @@ Windows: [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-te
 * [exa](https://github.com/ogham/exa) - A modern replacement for `ls`.
 * [ripgrep](https://github.com/BurntSushi/ripgrep) - A line-oriented search tool that recursively searches for a regex pattern.
 * [tmux](https://github.com/tmux/tmux) - A terminal multiplexer.
+
+## Installation
+
+First, make sure you are running a recent version of [Fedora](https://getfedora.org/) or [Ubuntu](https://ubuntu.com/).
+
+Then, install the fish shell and run `fish install.sh`.
