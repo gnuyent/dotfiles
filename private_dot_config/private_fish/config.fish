@@ -80,6 +80,7 @@ abbr --add ifconfig 'ip -c addr'
 # DNF upgrade
 abbr --add up 'sudo dnf upgrade --refresh --assumeyes'
 abbr --add upra 'update_rust_analyzer'
+abbr --add upnv 'update_neovim'
 
 # Get current ip
 abbr --add ip 'curl https://ipecho.net/plain ; echo'
