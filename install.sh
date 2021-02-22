@@ -66,10 +66,12 @@ end
 
 # Copy SSH keys to SSH user directory.
 function copy_ssh --description "Copy SSH keys to SSH key directory."
+	# See if given directory exists and SSH keys are present
 	if test (count $ARGUMENTS) -eq 1; and test -d $ARGUMENTS[1]; and test -e $ARGUMENTS[1]/id_rsa; and test -e $ARGUMENTS[1]/id_rsa.pub
 		set SSH_DIR $ARGUMENTS[1]
 		set LOCAL_SSH_DIR ~/.ssh
 
+		# If we already have SSH keys, ask to overwrite.
 		if test -d $LOCAL_SSH_DIR; and test -e ~/.ssh/id_rsa; and test -e ~/.ssh/id_rsa.pub
 			if not read_confirm "Overwrite SSH keys?"
 				return 1
@@ -109,7 +111,7 @@ function os_check --description "Determine OS."
 		exit 1
 	end
 
-	# Replace beginning quotation mark in UNAME
+	# Replace beginning quotation mark in $UNAME
 	set --global UNAME (string replace \" "" (echo $UNAME | awk '{print $1;}'))
 end
 
@@ -246,5 +248,4 @@ end
 
 main
 
-echo "Restart highly recommended."
 echo "Done!"

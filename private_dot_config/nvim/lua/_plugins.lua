@@ -49,6 +49,9 @@ return require('packer').startup(function()
   ----------------------------------------
   use {
     'neovim/nvim-lspconfig',
+    requires = {
+      {'nvim-lua/lsp_extensions.nvim'}
+    },
     config = [[require('config.nvim-lsp')]]
   }
 
@@ -93,7 +96,10 @@ return require('packer').startup(function()
 
   use {'tpope/vim-fugitive'}
 
-  use {'mhinz/vim-signify'}
+  use {
+    'mhinz/vim-signify',
+    config = [[require('config.signify')]]
+  }
 
   ----------------------------------------
   -- Markdown/Notetaking

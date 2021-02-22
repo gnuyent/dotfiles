@@ -49,5 +49,14 @@ lspconfig.gopls.setup{
 lspconfig.rust_analyzer.setup{
   root_dir = lspconfig.util.root_pattern('Cargo.toml', 'rust-project.json'),
   capabilities = capabilities,
-  on_attach = on_attach
+  on_attach = on_attach,
 }
+
+-- Enable Diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = true,
+    signs = true,
+    update_in_insert = true,
+  }
+)
