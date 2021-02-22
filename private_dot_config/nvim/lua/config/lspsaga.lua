@@ -1,7 +1,9 @@
 local saga = require 'lspsaga'
 local map = vim.api.nvim_set_keymap
 
-saga.init_lsp_saga()
+saga.init_lsp_saga {
+  use_saga_diagnostic_sign = false
+}
 
 -- lsp provider to find the cursor word definition and reference
 map('n', 'gr', ":Lspsaga lsp_finder<CR>", { noremap = true, silent = true })

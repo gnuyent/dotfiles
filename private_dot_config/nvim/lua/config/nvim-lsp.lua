@@ -36,6 +36,18 @@ local on_attach = function(client)
   }
 end
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    update_in_insert = false,
+    -- Enable virtual text only on Warning or above, override spacing to 2
+    virtual_text = {
+      spacing = 2,
+      severity_limit = "Warning",
+    },
+  }
+)
+
 -- LSP Configurations
 -- Bash
 lspconfig.bashls.setup{}
@@ -51,12 +63,3 @@ lspconfig.rust_analyzer.setup{
   capabilities = capabilities,
   on_attach = on_attach,
 }
-
--- Enable Diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-  }
-)
