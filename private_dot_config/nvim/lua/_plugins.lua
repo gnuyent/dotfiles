@@ -39,14 +39,10 @@ return require('packer').startup(function()
 
   use {'psliwka/vim-smoothie'}
 
-  --use {
-  --  'glepnir/indent-guides.nvim',
-  --  config = [[require('config.indent-guides')]]
-  --}
-
   use {
     'lukas-reineke/indent-blankline.nvim',
-    branch = 'lua'
+    branch = 'lua',
+    config = [[require('config.indent-blankline')]]
   }
 
   ----------------------------------------
