@@ -33,38 +33,42 @@
 			"fontSize": 13,
 			"padding": "0, 0, 0, 0",
 			"antialiasingMode": "cleartype",
-			"colorScheme": "Forest Night"
+			"colorScheme": "Ayu Dark"
         },
-    }
+        "list":
+        [
+        ]
+    },
+
     // Add custom color schemes to this array.
     // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
     "schemes": [
-	{
-		"name": "Forest Night",
+		{
+			"name": "Ayu Dark",
 
-		"cursorColor": "#d8caac",
-		"selectionBackground": "#505a60",
+			"cursorColor": "#e6b450",
+			"selectionBackground": "#273747",
 
-		"background" : "#323d43",
-		"foreground" : "#d8caac",
+			"background" : "#0a0e14",
+			"foreground" : "#b3b1ad",
 
-		"black" : "#3c474d",
-		"blue" : "#83b6af",
-		"cyan" : "#87c095",
-		"green" : "#a7c080",
-		"purple" : "#d39bb6",
-		"red" : "#e68183",
-		"white" : "#d8caac",
-		"yellow" : "#d9bb80",
-		"brightBlack" : "#3c474d",
-		"brightBlue" : "#83b6af",
-		"brightCyan" : "#87c095",
-		"brightGreen" : "#a7c080",
-		"brightPurple" : "#d39bb6",
-		"brightRed" : "#e68183",
-		"brightWhite" : "#d8caac",
-		"brightYellow" : "#d9bb80"
-		},
+			"black" : "#00010a",
+			"blue" : "#53bdfa",
+			"cyan" : "#90e1c6",
+			"green" : "#91b362",
+			"purple" : "#fae994",
+			"red" : "#ea6c73",
+			"white" : "#c7c7c7",
+			"yellow" : "#f9af4f",
+			"brightBlack" : "#686868",
+			"brightBlue" : "#59c2ff",
+			"brightCyan" : "#95e6cb",
+			"brightGreen" : "#c2d94c",
+			"brightPurple" : "#ffee99",
+			"brightRed" : "#f07178",
+			"brightWhite" : "#ffffff",
+			"brightYellow" : "#ffb454"
+		}
 	],
 
     // Add custom actions and keybindings to this array.
@@ -72,12 +76,9 @@
     // To learn more about actions and keybindings, visit https://aka.ms/terminal-keybindings
     "actions":
     [
-        // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
-        // These two lines additionally bind them to Ctrl+C and Ctrl+V.
-        // To learn more about selection, visit https://aka.ms/terminal-selection
-        { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
-        { "command": "paste", "keys": "ctrl+shift+v" },
-
+	// Ctrl+C / Ctrl+V for copy paste
+	{ "keys": "ctrl+c", "command": "copy"},
+	{ "keys": "ctrl+v", "command": "paste"},
         // Press Ctrl+Shift+F to open the search box
         { "command": "find", "keys": "ctrl+shift+f" },
 
