@@ -28,7 +28,7 @@ return require('packer').startup(function()
   ----------------------------------------
   -- Visuals
   ----------------------------------------
-  use {'sainnhe/gruvbox-material'}
+  use {'Luxed/ayu-vim'}
 
   use {'kyazdani42/nvim-web-devicons'}
 

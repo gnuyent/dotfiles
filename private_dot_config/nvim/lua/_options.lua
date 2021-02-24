@@ -55,7 +55,7 @@ local options = {
 apply_options(options)
 
 vim.o.background = "dark"
-cmd("colorscheme gruvbox-material")
+cmd("colorscheme ayu")
 -- Filetype plugins
 cmd("filetype plugin indent on")
 -- Use system clipboard
