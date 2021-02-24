@@ -1,6 +1,18 @@
 local lspconfig = require('lspconfig')
 local protocol = require('vim.lsp.protocol')
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    update_in_insert = false,
+    -- Enable virtual text only on Warning or above, override spacing to 2
+    virtual_text = {
+      spacing = 2,
+      severity_limit = "Warning",
+    },
+  }
+)
+
 -- Support for rust-analyzer magic completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -35,18 +47,6 @@ local on_attach = function(client)
     '';   -- TypeParameter = 25;
   }
 end
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    update_in_insert = false,
-    -- Enable virtual text only on Warning or above, override spacing to 2
-    virtual_text = {
-      spacing = 2,
-      severity_limit = "Warning",
-    },
-  }
-)
 
 -- LSP Configurations
 -- Bash

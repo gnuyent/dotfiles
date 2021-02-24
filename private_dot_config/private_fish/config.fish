@@ -1,6 +1,6 @@
 set --export SHELL /usr/bin/fish
 set --export EDITOR nvim
-set --export BAT_THEME "gruvbox"
+set --export BAT_THEME "ayu-dark"
 set --export MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set --export MANROFFOPT "-c"
 
