@@ -5,7 +5,7 @@
 ## Overview
 
 ### Colors
-[gruvbox-material](https://github.com/sainnhe/gruvbox-material) - A modified version of [Gruvbox](https://github.com/morhetz/gruvbox), the contrast is adjusted to be softer in order to protect developers' eyes.
+[ayu dark](https://github.com/Luxed/ayu-vim) - A dark, modern theme for (neo)vim.
 
 ### Font
 [FiraCode Nerd Font Complete Mono](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraCode/Regular/complete) - A free monospaced font containing ligatures for common programming multi-character combinations.
