@@ -1,3 +1,3 @@
 set smartindent
 
-autocmd BufWritePre *.rs lua vim.lsp.buf.formatting(nil, 1000)
+nnoremap <silent> <leader>f <CMD>lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>
