@@ -30,6 +30,7 @@ DNF_PACKAGES=(
 	"ripgrep"
 	"texlive-scheme-full"
 	"tmux"
+	"util-linux-user"
 )
 
 # NPM packages to install.
@@ -144,6 +145,7 @@ fedora_configure_repositories () {
 		sudo dnf config-manager --assumeyes --add-repo $repo --quiet
 	done
 
+	echo
 	echo "${INFO} Configuring DNF COPR repositories..."
 	sleep 1
 	for copr in $DNF_COPR
@@ -190,6 +192,7 @@ chezmoi_install () {
 	else
 
 		echo "    ${COMMAND} curl-sfL https://git.io/chezmoi | sh"
+		cd ~
 		curl -sfL https://git.io/chezmoi | sh
 		mv ~/bin/chezmoi ~/.local/bin
 		rm -rf ~/bin
@@ -219,7 +222,7 @@ poetry_install () {
 		echo
 	else
 		echo "    ${COMMAND} curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -"
-		curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+		curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python - 2>/dev/null
 		echo
 	fi
 }
@@ -232,7 +235,7 @@ rust_install () {
 	else
 		echo "    ${COMMAND} curl -sSf https://sh.rustup.rs"
 		curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh
-		sh /tmp/rustup.sh -y
+		sh /tmp/rustup.sh -y --quiet
 		rm /tmp/rustup.sh
 		echo
 	fi
