@@ -198,6 +198,7 @@ chezmoi_install () {
 		rm -rf ~/bin
 		echo "    ${INFO} Setting up dotfiles..."
 		~/.local/bin/chezmoi init git@github.com:gnuyent/dotfiles.git
+		~/.local/bin/chezmoi apply
 		echo
 	fi
 }
