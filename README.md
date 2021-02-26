@@ -58,4 +58,8 @@ Windows: [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-te
 
 First, make sure you are running a recent version of [Fedora](https://getfedora.org/) or [Ubuntu](https://ubuntu.com/).
 
-Then, install the fish shell and run `fish install.sh`.
+Then, run the following command:
+
+```shell
+curl -sSL https://raw.githubusercontent.com/gnuyent/dotfiles/master/install.sh | bash
+```
