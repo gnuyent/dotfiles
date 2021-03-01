@@ -49,6 +49,7 @@ end
 
 # git
 if type -q git
+	abbr --add ga 'git add'
 	abbr --add gcl 'git clone'
 	abbr --add gcm 'git commit -m'
 end
