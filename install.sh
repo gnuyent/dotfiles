@@ -24,6 +24,7 @@ DNF_PACKAGES=(
 	"fish"
 	"git"
 	"golang"
+	"newsboat"
 	"npm"
 	"openssl-devel"
 	"pandoc"
