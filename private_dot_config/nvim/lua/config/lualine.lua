@@ -18,7 +18,10 @@ lualine.sections = {
   lualine_x = { 'encoding', 'fileformat', 'filetype',
     {
       'diagnostics',
-      sources = { 'nvim_lsp' }
+      sources = { 'nvim_lsp' },
+      color_info = "#53bdfa",
+      color_error = "#ea6c73",
+      color_warn = "#f9af4f"
     }
   },
   lualine_y = { 'progress' },

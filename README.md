@@ -23,7 +23,7 @@ Windows: [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-te
   * [z](https://github.com/jethrokuan/z) - A plugin which tracks the directories you visit. With a combination of frequency and recency, it enables you to jump to the directory in mind.
 * [neovim nightly](https://github.com/neovim/neovim) - A modern fork of Vim.
   * [packer.nvim](https://github.com/wbthomason/packer.nvim) - A Lua-based plugin/package management for Neovim.
-  * [galaxyline.nvim](https://github.com/glepnir/galaxyline.nvim) - A light-weight and super fast statusline plugin.
+  * [lualine.nvim](https://github.com/hoob3rt/lualine.nvim) - A blazing fast and easy to configure neovim statusline written in pure lua.
   * [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - A highly extendable fuzzy finder over lists.
   * Completion
     * [nvim-lsp](https://neovim.io/doc/user/lsp.html) - A built-in language server protocol (LSP) client.
@@ -34,18 +34,12 @@ Windows: [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-te
     * [lspsaga](https://github.com/glepnir/lspsaga.nvim) - A light-weight LSP plugin based on neovim built-in LSP with highly a performant UI.
   * Utilities
     * [fugitive](https://github.com/tpope/vim-fugitive) - A Git plugin for (neo)vim.
-    * [signify](https://github.com/mhinz/vim-signify) - A sign column indicator for Git modifications.
     * [vista.vim](https://github.com/liuchengxu/vista.vim) - A viewer and finder for LSP symbols/tags in (neo)vim.
     * [vim-doge](https://github.com/kkoomen/vim-doge) - A documentation generator.
   * Visuals
     * [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) - A lua fork of [vim-devicons](https://github.com/ryanoasis/vim-devicons).
     * [vim-smoothie](https://github.com/psliwka/vim-smoothie) - A smooth scrolling plugin.
     * [indent-guides.nvim](https://github.com/glepnir/indent-guides.nvim) - An asynchronous indent guide plugin for neovim.
-  * Note taking
-    * [wiki.vim](https://github.com/lervag/wiki.vim) - A plugin for writing and maintaining a personal wiki.
-    * [vim-pandoc](https://github.com/vim-pandoc/vim-pandoc) - A plugin for integration between [pandoc](https://pandoc.org/) and (neo)vim.
-    * [vim-pandoc-syntax](https://github.com/vim-pandoc/vim-pandoc-syntax) - A standalone syntax module for [pandoc](https://pandoc.org/).
-    * [markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim) - A live web browser markdown preview with synchronized scrolling.
   * tmux integration
     * [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) - A plugin which will allow you to navigate seamlessly between vim and tmux splits using a consistent set of hotkeys.
     * [better-vim-tmux-resizer](https://github.com/RyanMillerC/better-vim-tmux-resizer) - A fork of [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) which allows resizing panes and windows instead of navigating between them.
