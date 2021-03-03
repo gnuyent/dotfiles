@@ -54,10 +54,8 @@ local options = {
 
 apply_options(options)
 
-vim.o.background = "dark"
-vim.g.ayucolor = "dark"
-cmd("colorscheme ayu")
 -- Filetype plugins
 cmd("filetype plugin indent on")
+
 -- Use system clipboard
 vim.o.clipboard = "unnamedplus"

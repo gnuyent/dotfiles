@@ -28,7 +28,10 @@ return require('packer').startup(function()
   ----------------------------------------
   -- Visuals
   ----------------------------------------
-  use {'Luxed/ayu-vim'}
+  use {
+    'Luxed/ayu-vim',
+    config = [[require('config.ayu')]]
+  }
 
   use {'kyazdani42/nvim-web-devicons'}
 
@@ -94,33 +97,4 @@ return require('packer').startup(function()
   }
 
   use {'tpope/vim-fugitive'}
-
-
-  ----------------------------------------
-  -- Markdown/Notetaking
-  ----------------------------------------
-  use {
-    'lervag/wiki.vim',
-    config = [[require('config.wiki')]],
-    ft = {'markdown', 'pandoc'}
-  }
-
-  use {
-    'vim-pandoc/vim-pandoc',
-    config = [[require('config.pandoc')]],
-    ft = {'markdown', 'pandoc'}
-  }
-
-  use {
-    'vim-pandoc/vim-pandoc-syntax',
-    config = [[require('config.pandoc')]],
-    ft = {'markdown', 'pandoc'}
-  }
-
-  use {
-    'iamcco/markdown-preview.nvim',
-    run = 'cd app && yarn install',
-    config = [[require('config.markdown-preview')]],
-    ft = {'markdown', 'pandoc'}
-  }
 end)
