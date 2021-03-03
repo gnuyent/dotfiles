@@ -84,7 +84,7 @@ abbr --add upra 'update_rust_analyzer'
 abbr --add upnv 'update_neovim'
 
 # Get current ip
-abbr --add ip 'curl https://ipecho.net/plain ; echo'
+abbr --add myip 'curl https://ipecho.net/plain ; echo'
 
 # Clear
 abbr --add c 'clear'

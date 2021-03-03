@@ -33,8 +33,9 @@ return require('packer').startup(function()
   use {'kyazdani42/nvim-web-devicons'}
 
   use {
-    'glepnir/galaxyline.nvim',
-    config = [[require('config.galaxyline')]]
+    'hoob3rt/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true},
+    config = [[require('config.lualine')]]
   }
 
   use {'psliwka/vim-smoothie'}
@@ -94,10 +95,6 @@ return require('packer').startup(function()
 
   use {'tpope/vim-fugitive'}
 
-  use {
-    'mhinz/vim-signify',
-    config = [[require('config.signify')]]
-  }
 
   ----------------------------------------
   -- Markdown/Notetaking
