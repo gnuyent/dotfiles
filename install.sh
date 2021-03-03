@@ -37,7 +37,6 @@ DNF_PACKAGES=(
 # NPM packages to install.
 NPM_PACKAGES=(
 	"bash-language-server"
-	"yarn"
 )
 
 # Rust (cargo) packages to install.
