@@ -22,6 +22,7 @@ DNF_PACKAGES=(
 	"aria2"
 	"curl"
 	"fish"
+	"gdb"
 	"git"
 	"golang"
 	"newsboat"
@@ -310,6 +311,7 @@ main () {
 	sleep 1
 	rust_analyzer_install
 	sleep 1
+	sudo chsh -s /bin/fish invader
 }
 
 main

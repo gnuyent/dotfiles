@@ -1,6 +1,9 @@
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
 
+-- Remove pattern not found message
+vim.cmd("set shortmess+=c")
+
 require'compe'.setup {
     enabled = true,
     autocomplete = true,
