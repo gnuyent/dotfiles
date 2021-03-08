@@ -25,6 +25,7 @@ DNF_PACKAGES=(
 	"gdb"
 	"git"
 	"golang"
+	"lldb"
 	"newsboat"
 	"npm"
 	"openssl-devel"
@@ -38,6 +39,7 @@ DNF_PACKAGES=(
 # NPM packages to install.
 NPM_PACKAGES=(
 	"bash-language-server"
+	"typescript"
 )
 
 # Rust (cargo) packages to install.

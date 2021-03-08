@@ -12,7 +12,14 @@ execute 'packadd packer.nvim'
 -- Automatically recompile on file save.
 execute('autocmd BufWritePost plugins.lua PackerCompile')
 
-return require('packer').startup(function()
+local packer = require('packer')
+local util = require('packer.util')
+
+packer.init {
+  compile_path = util.join_paths(vim.fn.stdpath('config'), 'packer', 'packer_compiled.vim')
+}
+
+return packer.startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
   ----------------------------------------

@@ -1,11 +1,9 @@
 " Bind leader key to space
-let g:mapleader=" "
+let mapleader = " "
 
 if exists('g:vscode')
-	" Center next/previous search
-	nnoremap N Nzz
-	nnoremap n nzz
-else
+elseif has('nvim-0.5')
+	runtime! packer/packer_compiled.vim
 lua << EOF
 	require 'init'
 EOF
