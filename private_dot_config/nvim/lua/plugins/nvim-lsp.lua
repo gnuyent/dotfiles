@@ -73,18 +73,7 @@ end
 -- LSP Configurations
 ---------------------------------------------------------------------------------------------------------------
 -- Formatters
-local eslint_d = require "plugins.efm.eslint_d"
-local prettier = require "plugins.efm.prettier"
-local format_options_prettier = {
-    tabWidth = 4,
-    singleQuote = true,
-    trailingComma = "all",
-    configPrecedence = "prefer-file"
-}
-vim.g.format_options_typescript = format_options_prettier
-vim.g.format_options_javascript = format_options_prettier
-vim.g.format_options_typescriptreact = format_options_prettier
-vim.g.format_options_javascriptreact = format_options_prettier
+local prettier_eslint = require "plugins.efm.prettier_eslint"
 
 require "lspconfig".efm.setup {
   on_attach = on_attach,
@@ -93,10 +82,10 @@ require "lspconfig".efm.setup {
   settings = {
     rootMarkers = {".git/"},
     languages = {
-      typescript = {prettier, eslint_d},
-      javascript = {prettier, eslint_d},
-      typescriptreact = {prettier, eslint_d},
-      javascriptreact = {prettier, eslint_d},
+      typescript = {prettier_eslint},
+      javascript = {prettier_eslint},
+      typescriptreact = {prettier_eslint},
+      javascriptreact = {prettier_eslint},
     }
   }
 }
