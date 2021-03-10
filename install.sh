@@ -26,7 +26,6 @@ DNF_PACKAGES=(
 	"git"
 	"golang"
 	"lldb"
-	"newsboat"
 	"npm"
 	"openssl-devel"
 	"pandoc"
@@ -40,6 +39,7 @@ DNF_PACKAGES=(
 NPM_PACKAGES=(
 	"bash-language-server"
 	"typescript"
+	"typescript-language-server"
 )
 
 # Rust (cargo) packages to install.

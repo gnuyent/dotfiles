@@ -1,7 +1,15 @@
--- My Configs
--- Load packer first
-require '_plugins'
+local setup = function()
+  -- Load options
+  require'options'
 
-require '_mappings'
-require '_options'
-require '_terminal'
+  -- Load keybinds
+  require'keybinds'
+
+  -- Load floating terminal
+  require'terminal'
+
+  -- Load plugins and configurations
+  require'plugins'
+end
+
+setup()

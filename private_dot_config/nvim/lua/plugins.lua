@@ -29,7 +29,7 @@ return packer.startup(function()
 
   use {
     'RyanMillerC/better-vim-tmux-resizer',
-    config = [[require('config.vim-tmux-navigator')]]
+    config = [[require('plugins/vim-tmux-navigator')]]
   }
 
   ----------------------------------------
@@ -37,7 +37,7 @@ return packer.startup(function()
   ----------------------------------------
   use {
     'Luxed/ayu-vim',
-    config = [[require('config.ayu')]]
+    config = [[require('plugins/ayu')]]
   }
 
   use {'kyazdani42/nvim-web-devicons'}
@@ -45,7 +45,7 @@ return packer.startup(function()
   use {
     'hoob3rt/lualine.nvim',
     requires = {'kyazdani42/nvim-web-devicons', opt = true},
-    config = [[require('config.lualine')]]
+    config = [[require('plugins/lualine')]]
   }
 
   use {'psliwka/vim-smoothie'}
@@ -53,7 +53,7 @@ return packer.startup(function()
   use {
     'lukas-reineke/indent-blankline.nvim',
     branch = 'lua',
-    config = [[require('config.indent-blankline')]]
+    config = [[require('plugins/indent-blankline')]]
   }
 
   ----------------------------------------
@@ -61,7 +61,7 @@ return packer.startup(function()
   ----------------------------------------
   use {
     'neovim/nvim-lspconfig',
-    config = [[require('config.nvim-lsp')]]
+    config = [[require('plugins/nvim-lsp')]]
   }
 
   use {
@@ -69,12 +69,12 @@ return packer.startup(function()
     requires = {
       {'hrsh7th/vim-vsnip'}
     },
-    config = [[require('config.nvim-compe')]]
+    config = [[require('plugins/compe')]]
   }
 
   use {
     'glepnir/lspsaga.nvim',
-    config = [[require('config.lspsaga')]]
+    config = [[require('plugins/lspsaga')]]
   }
 
   ----------------------------------------
@@ -83,24 +83,24 @@ return packer.startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-    config = [[require('config.telescope')]]
+    config = [[require('plugins/telescope')]]
   }
 
   use {
     'nvim-treesitter/nvim-treesitter',
-    config = [[require('config.treesitter')]],
+    config = [[require('plugins/treesitter')]],
     run = ':TSUpdate'
   }
 
   use {
     'liuchengxu/vista.vim',
-    config = [[require('config.vista')]]
+    config = [[require('plugins/vista')]]
   }
 
   use {
     'kkoomen/vim-doge',
     run = ':call doge#install()',
-    config = [[require('config.doge')]]
+    config = [[require('plugins/doge')]]
   }
 
   use {'tpope/vim-fugitive'}

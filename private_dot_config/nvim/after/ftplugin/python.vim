@@ -1,5 +1,5 @@
 " <LEADER>+F bind for organizing imports and running formatters
-nnoremap <silent> <leader>f :CocCommand pyright.organizeimports<CR>
+"nnoremap <silent> <leader>f :CocCommand pyright.organizeimports<CR>
 
 setlocal tabstop=4
 setlocal softtabstop=4
