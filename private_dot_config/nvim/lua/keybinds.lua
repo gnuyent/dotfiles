@@ -10,5 +10,5 @@ map('n', 'N', 'Nzz', { noremap = true })
 map('n', 'n', 'nzz', { noremap = true })
 
 -- Toggle floating terminal on CTRL+Z
-map('t', '<C-z>', '<C-\\><C-n>:lua require("_terminal").toggle()<CR>', { noremap = true, silent = true })
-map('n', '<C-z>', ':lua require("_terminal").toggle()<CR>', { noremap = true, silent = true })
+map('t', '<C-z>', '<C-\\><C-n>:lua require("terminal").toggle()<CR>', { noremap = true, silent = true })
+map('n', '<C-z>', ':lua require("terminal").toggle()<CR>', { noremap = true, silent = true })

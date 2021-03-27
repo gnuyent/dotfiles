@@ -1,0 +1,20 @@
+#!/bin/python
+
+import subprocess
+import sys
+
+nmap_cmd = "sudo nmap -sV -T4 -O -v -oN"
+
+def main():
+    try:
+        with open(sys.argv[1]) as f:
+            lines = f.read().splitlines()
+            for line in lines:
+                ip, filename = line.split(" ")
+                subprocess.call(f"{nmap_cmd} {filename}.nmap {ip}", shell=True)
+    except IndexError:
+        print("Invalid file or no file given.")
+        exit(1)
+
+if __name__ == "__main__":
+    main()

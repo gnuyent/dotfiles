@@ -3,6 +3,10 @@ set --export EDITOR nvim
 set --export BAT_THEME "ayu-dark"
 set --export MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set --export MANROFFOPT "-c"
+set --export FZF_DEFAULT_COMMAND "fd"
+set --export EMACSDIR $HOME/.config/emacs
+set --export DOOMDIR $HOME/.config/doom
+set --export DOOMLOCALDIR $HOME/.config/emacs/.local
 
 # Custom bin
 if test -e $HOME/.local/bin
@@ -22,6 +26,11 @@ end
 # Dotnet
 if test -e $HOME/.dotnet
     set PATH $HOME/.dotnet $PATH
+end
+
+# Doom
+if test -e $HOME/.config/emacs/bin
+    set PATH $HOME/.config/emacs/bin $PATH
 end
 
 # cowsay
@@ -73,6 +82,15 @@ end
 # tmux
 if type -q tmux
 	alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
+end
+
+# nmap
+# mega nmap scans and stuff
+if type -q nmap
+	abbr --add osscan 'sudo nmap -T5 -O -v'
+	abbr --add intensetcp 'nmap -p 1-65535 -T5 -A -v'
+	abbr --add intenseall 'sudo nmap -p 1-65535 -sS -sU -T5 -A -v'
+	abbr --add quickscan 'sudo nmap -sV -T4 -O -F -version-light -v'
 end
 
 # ifconfig

@@ -98,7 +98,10 @@ lspconfig.gopls.setup{
 }
 
 -- JavaScript
-require'lspconfig'.tsserver.setup{}
+lspconfig.tsserver.setup{}
+
+-- Python
+lspconfig.pyright.setup{}
 
 -- Rust
 lspconfig.rust_analyzer.setup{

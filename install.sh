@@ -20,14 +20,15 @@ DNF_REPOS=(
 # DNF packages to install.
 DNF_PACKAGES=(
 	"aria2"
+	"autoconf"
 	"curl"
+	"emacs"
 	"fish"
 	"gdb"
 	"git"
 	"golang"
 	"lldb"
 	"npm"
-	"openssl-devel"
 	"pandoc"
 	"ripgrep"
 	"texlive-scheme-full"
@@ -38,6 +39,7 @@ DNF_PACKAGES=(
 # NPM packages to install.
 NPM_PACKAGES=(
 	"bash-language-server"
+	"pyright"
 	"typescript"
 	"typescript-language-server"
 )
@@ -47,6 +49,7 @@ RUST_PACKAGES=(
 	"bat"
 	"exa"
 	"hyperfine"
+	"fd-find"
 )
 
 RED=$(tput setaf 1)

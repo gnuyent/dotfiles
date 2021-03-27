@@ -42,7 +42,7 @@ terminal.open = function ()
   end
 
   vim.cmd('startinsert')
-  vim.cmd("autocmd! TermClose <buffer> lua require('_terminal').close(true)")
+  vim.cmd("autocmd! TermClose <buffer> lua require('terminal').close(true)")
 
   -- Save current handles.
   terminal.win = win
