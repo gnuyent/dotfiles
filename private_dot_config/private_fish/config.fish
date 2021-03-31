@@ -7,6 +7,7 @@ set --export FZF_DEFAULT_COMMAND "fd"
 set --export EMACSDIR $HOME/.config/emacs
 set --export DOOMDIR $HOME/.config/doom
 set --export DOOMLOCALDIR $HOME/.config/emacs/.local
+set --export DISPLAY (cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 # Custom bin
 if test -e $HOME/.local/bin

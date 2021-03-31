@@ -1,14 +1,11 @@
 local map = vim.api.nvim_set_keymap
 
+local noremap = { noremap = true }
+local opts = { noremap = true, silent = true }
+
 -- Bind backspace to C-^ (last buffer)
--- equivalent to nnoremap <BS> <C-^>
-map('n', '<BS>', '<C-^>', { noremap = true })
+map('n', '<BS>', '<C-^>', noremap)
 
 -- Center next/previous search with zz
--- equivalent to nnoremap N(n) N(n)zz
-map('n', 'N', 'Nzz', { noremap = true })
-map('n', 'n', 'nzz', { noremap = true })
-
--- Toggle floating terminal on CTRL+Z
-map('t', '<C-z>', '<C-\\><C-n>:lua require("terminal").toggle()<CR>', { noremap = true, silent = true })
-map('n', '<C-z>', ':lua require("terminal").toggle()<CR>', { noremap = true, silent = true })
+map('n', 'N', 'Nzz', noremap)
+map('n', 'n', 'nzz', noremap)

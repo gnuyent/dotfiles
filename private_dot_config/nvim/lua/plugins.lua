@@ -15,6 +15,7 @@ execute('autocmd BufWritePost plugins.lua PackerCompile')
 local packer = require('packer')
 local util = require('packer.util')
 
+-- Use nvim/packer instead of nvim/plugins
 packer.init {
   compile_path = util.join_paths(vim.fn.stdpath('config'), 'packer', 'packer_compiled.vim')
 }
@@ -23,29 +24,20 @@ return packer.startup(function()
   use {'wbthomason/packer.nvim', opt = true}
 
   ----------------------------------------
-  -- tmux + nvim
-  ----------------------------------------
-  use {'christoomey/vim-tmux-navigator'}
-
-  use {
-    'RyanMillerC/better-vim-tmux-resizer',
-    config = [[require('plugins/vim-tmux-navigator')]]
-  }
-
-  ----------------------------------------
   -- Visuals
   ----------------------------------------
+  -- This is a fork of the original ayu-vim theme.
   use {
     'Luxed/ayu-vim',
-    config = [[require('plugins/ayu')]]
+    config = require("plugins._theme").config,
   }
 
   use {'kyazdani42/nvim-web-devicons'}
 
   use {
-    'hoob3rt/lualine.nvim',
-    requires = {'kyazdani42/nvim-web-devicons', opt = true},
-    config = [[require('plugins/lualine')]]
+    --'hoob3rt/lualine.nvim',
+    '~/Projects/lualine.nvim',
+    config = require("plugins._statusline").config,
   }
 
   use {'psliwka/vim-smoothie'}
@@ -53,28 +45,38 @@ return packer.startup(function()
   use {
     'lukas-reineke/indent-blankline.nvim',
     branch = 'lua',
-    config = [[require('plugins/indent-blankline')]]
+    config = require("plugins._indent-blankline").config,
   }
 
   ----------------------------------------
   -- Completion
   ----------------------------------------
+  -- neovim built-in LSP
   use {
     'neovim/nvim-lspconfig',
-    config = [[require('plugins/nvim-lsp')]]
-  }
-
-  use {
-    'hrsh7th/nvim-compe',
     requires = {
-      {'hrsh7th/vim-vsnip'}
+      {'kabouzeid/nvim-lspinstall'},
+      {
+        'hrsh7th/nvim-compe',
+        requires = 'hrsh7th/vim-vsnip',
+      },
+      {'glepnir/lspsaga.nvim'},
+      {'fatih/vim-go'},
+      {
+        'liuchengxu/vista.vim',
+        config = require("plugins._vista").config
+      },
+      {'windwp/nvim-autopairs'},
+      {'rafamadriz/friendly-snippets'},
     },
-    config = [[require('plugins/compe')]]
+    config = require("plugins._lsp").config,
   }
 
   use {
-    'glepnir/lspsaga.nvim',
-    config = [[require('plugins/lspsaga')]]
+    'neoclide/coc.nvim',
+    branch = 'release',
+    config = require("plugins._coc").config,
+    disable = true
   }
 
   ----------------------------------------
@@ -82,26 +84,52 @@ return packer.startup(function()
   ----------------------------------------
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-    config = [[require('plugins/telescope')]]
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'}
+    },
+    config = require("plugins._telescope").config,
   }
 
   use {
     'nvim-treesitter/nvim-treesitter',
-    config = [[require('plugins/treesitter')]],
-    run = ':TSUpdate'
-  }
-
-  use {
-    'liuchengxu/vista.vim',
-    config = [[require('plugins/vista')]]
+    config = require("plugins._treesitter").config,
+    run = ':TSUpdate',
   }
 
   use {
     'kkoomen/vim-doge',
     run = ':call doge#install()',
-    config = [[require('plugins/doge')]]
+    config = require("plugins._doge").config,
   }
 
   use {'tpope/vim-fugitive'}
+
+  use {
+    'justinmk/vim-sneak',
+    config = require("plugins._sneak").config
+  }
+
+  use {
+    'christoomey/vim-tmux-navigator',
+    requires = 'RyanMillerC/better-vim-tmux-resizer',
+    config = require("plugins._tmux").config,
+  }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    config = require('plugins/_tree').config,
+  }
+
+  use {'tpope/vim-commentary'}
+
+  use {
+    'dstein64/vim-startuptime',
+    disable = true,
+  }
+
+  use {
+    'rktjmp/lush.nvim',
+    disable = true
+  }
 end)
