@@ -1,0 +1,363 @@
+#+title: Doom Emacs Configuration
+#+author: gnuyent
+
+* Introduction
+
+This is my personal [[https://github.com/hlissner/doom-emacs][Doom Emacs]] configuration running on Fedora on WSL2.
+
+Big thanks to [[https://tecosaur.github.io/emacs-config/config.html#simple-settings][tecosaur's configuration]].
+
+** Known Issues
+
+None at the moment.
+
+* Basic Configuration
+Run this file faster (slightly) with lexical binding (see [[https://nullprogram.com/blog/2016/12/22/][this]] for more information).
+#+begin_src emacs-lisp
+;;; config.el -*- lexical-binding: t; -*-
+#+end_src
+
+** Personal Information
+Some functionality uses this to identify you, e.g. GPG configuration, email
+clients, file templates and snippets.
+
+#+begin_src emacs-lisp
+(setq user-full-name "Brandon Nguyen"
+      user-mail-address "gnuyent@protonmail.com")
+#+end_src
+
+** Better defaults
+#+begin_src emacs-lisp
+(setq undo-limit 80000000           ; raise undo-limit to 80Mb
+      auto-save-default t           ; automatically save
+      truncate-string-ellipsis "…") ; show unicode ellipsis instead
+(display-time-mode 1)               ; show time in mode-line
+
+(if (equal "Battery status not available"
+           (battery))
+    (display-battery-mode 1)        ; show battery on laptop
+  (setq password-cache-expiry nil)) ; no battery = desktop
+#+end_src
+
+*** Default browser
+Opens in Windows browser when emacs is in WSL. This is dangerous since it
+doesn't check if we're actually in WSL.
+Gratefully stolen from: https://hkvim.com/post/windows-setup/
+
+#+begin_src emacs-lisp
+;; (defun wsl-browse-url-xdg-open (url &optional ignored)
+;;  (interactive (browse-url-interactive-arg "URL: "))
+;;  (shell-command-to-string (concat "explorer.exe " url)))
+;; (advice-add #'browse-url-xdg-open :override #'wsl-browse-url-xdg-open)
+(when (and (eq system-type 'gnu/linux)
+           (string-match
+            "Linux.*Microsoft.*Linux"
+            (shell-command-to-string "uname -a")))
+  (setq
+   browse-url-generic-program  "explorer.exe"
+   browse-url-browser-function #'browse-url-generic))
+#+end_src
+
+*** Frame sizing
+Keep Emacs maximized.
+
+#+begin_src emacs-lisp
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+#+end_src
+
+*** Auto-customizations
+By default changes made via a customisation interface are added to init.el. Prefer using =.custom.el= for this.
+
+#+begin_src emacs-lisp
+(setq-default custom-file (expand-file-name ".custom.el" doom-private-dir))
+(when (file-exists-p custom-file)
+  (load custom-file))
+#+end_src
+
+*** Vim-like bindings
+Let's quickly switch windows with =C-{h,j,k,l}=.
+#+begin_src emacs-lisp
+(map! :map general-override-mode-map
+      :n "C-h" #'evil-window-left
+      :n "C-j" #'evil-window-down
+      :n "C-k" #'evil-window-up
+      :n "C-l" #'evil-window-right)
+#+end_src
+
+This is a [[https://discord.com/channels/406534637242810369/406554085794381833/812465397025865729][temporary hack]] for =evil-org-agenda-mode-map=.
+#+begin_src emacs-lisp
+(map! :after evil-org-agenda
+      :map evil-org-agenda-mode-map
+      :n "C-h" #'evil-window-left
+      :n "C-j" #'evil-window-down
+      :n "C-k" #'evil-window-up
+      :n "C-l" #'evil-window-right)
+#+end_src
+
+Also, let's switch to the last buffer with =<BS>=.
+#+begin_src emacs-lisp
+(map! :map general-override-mode-map
+      :n "DEL" #'evil-switch-to-windows-last-buffer)
+#+end_src
+
+Open up directory search with =C-p=.
+#+begin_src emacs-lisp
+(map! :map general-override-mode-map
+      :n "C-p" #'+ivy/projectile-find-file)
+#+end_src
+
+Find in current directory with =C-f=.
+#+begin_src emacs-lisp
+(map! :map general-override-mode-map
+      :n "C-f" #'+ivy/project-search-from-cwd)
+#+end_src
+
+Visual block with =C-q=.
+#+begin_src emacs-lisp
+(undefine-key! "C-q") ; previously insert next typed character
+(map! :map evil-motion-state-map
+      "C-q" 'evil-visual-block)
+#+end_src
+
+* Doom Configuration
+** Theming
+Doom exposes five (optional) variables for controlling fonts in Doom. Here
+are the three important ones:
+
++ `doom-font'
++ `doom-variable-pitch-font'
++ `doom-big-font' -- used for `doom-big-font-mode'; use this for
+  presentations or streaming.
+
+They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+font string. You generally only need these two:
+(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "sans" :size 13))
+
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "Iosevka NF" :size 20)
+      doom-variable-pitch-font (font-spec :family "Iosevka NF" :size 20))
+#+end_src
+
+There are two ways to load a theme. Both assume the theme is installed and
+available. You can either set `doom-theme' or manually load a theme with the
+`load-theme' function.
+
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-tomorrow-night)
+#+end_src
+
+Set a pretty Emacs e.
+#+begin_src emacs-lisp
+(defvar fancy-splash-image-template
+  (expand-file-name "misc/splash-images/emacs-e-template.svg" doom-private-dir)
+  "Default template svg used for the splash image, with substitutions from ")
+
+(defvar fancy-splash-sizes
+  `((:height 300 :min-height 50 :padding (0 . 2))
+    (:height 250 :min-height 42 :padding (2 . 4))
+    (:height 200 :min-height 35 :padding (3 . 3))
+    (:height 150 :min-height 28 :padding (3 . 3))
+    (:height 100 :min-height 20 :padding (2 . 2))
+    (:height 75  :min-height 15 :padding (2 . 1))
+    (:height 50  :min-height 10 :padding (1 . 0))
+    (:height 1   :min-height 0  :padding (0 . 0)))
+  "list of plists with the following properties
+  :height the height of the image
+  :min-height minimum `frame-height' for image
+  :padding `+doom-dashboard-banner-padding' (top . bottom) to apply
+  :template non-default template file
+  :file file to use instead of template")
+
+(defvar fancy-splash-template-colours
+  '(("$colour1" . keywords) ("$colour2" . type) ("$colour3" . base5) ("$colour4" . base8))
+  "list of colour-replacement alists of the form (\"$placeholder\" . 'theme-colour) which applied the template")
+
+(unless (file-exists-p (expand-file-name "theme-splashes" doom-cache-dir))
+  (make-directory (expand-file-name "theme-splashes" doom-cache-dir) t))
+
+(defun fancy-splash-filename (theme-name height)
+  (expand-file-name (concat (file-name-as-directory "theme-splashes")
+                            theme-name
+                            "-" (number-to-string height) ".svg")
+                    doom-cache-dir))
+
+(defun fancy-splash-clear-cache ()
+  "Delete all cached fancy splash images"
+  (interactive)
+  (delete-directory (expand-file-name "theme-splashes" doom-cache-dir) t)
+  (message "Cache cleared!"))
+
+(defun fancy-splash-generate-image (template height)
+  "Read TEMPLATE and create an image if HEIGHT with colour substitutions as
+   described by `fancy-splash-template-colours' for the current theme"
+  (with-temp-buffer
+    (insert-file-contents template)
+    (re-search-forward "$height" nil t)
+    (replace-match (number-to-string height) nil nil)
+    (dolist (substitution fancy-splash-template-colours)
+      (goto-char (point-min))
+      (while (re-search-forward (car substitution) nil t)
+        (replace-match (doom-color (cdr substitution)) nil nil)))
+    (write-region nil nil
+                  (fancy-splash-filename (symbol-name doom-theme) height) nil nil)))
+
+(defun fancy-splash-generate-images ()
+  "Perform `fancy-splash-generate-image' in bulk"
+  (dolist (size fancy-splash-sizes)
+    (unless (plist-get size :file)
+      (fancy-splash-generate-image (or (plist-get size :template)
+                                       fancy-splash-image-template)
+                                   (plist-get size :height)))))
+
+(defun ensure-theme-splash-images-exist (&optional height)
+  (unless (file-exists-p (fancy-splash-filename
+                          (symbol-name doom-theme)
+                          (or height
+                              (plist-get (car fancy-splash-sizes) :height))))
+    (fancy-splash-generate-images)))
+
+(defun get-appropriate-splash ()
+  (let ((height (frame-height)))
+    (cl-some (lambda (size) (when (>= height (plist-get size :min-height)) size))
+             fancy-splash-sizes)))
+
+(setq fancy-splash-last-size nil)
+(setq fancy-splash-last-theme nil)
+(defun set-appropriate-splash (&rest _)
+  (let ((appropriate-image (get-appropriate-splash)))
+    (unless (and (equal appropriate-image fancy-splash-last-size)
+                 (equal doom-theme fancy-splash-last-theme)))
+    (unless (plist-get appropriate-image :file)
+      (ensure-theme-splash-images-exist (plist-get appropriate-image :height)))
+    (setq fancy-splash-image
+          (or (plist-get appropriate-image :file)
+              (fancy-splash-filename (symbol-name doom-theme) (plist-get appropriate-image :height))))
+    (setq +doom-dashboard-banner-padding (plist-get appropriate-image :padding))
+    (setq fancy-splash-last-size appropriate-image)
+    (setq fancy-splash-last-theme doom-theme)
+    (+doom-dashboard-reload)))
+
+(add-hook 'window-size-change-functions #'set-appropriate-splash)
+(add-hook 'doom-load-theme-hook #'set-appropriate-splash)
+#+end_src
+
+Remove the items in the dashboard...
+#+begin_src emacs-lisp
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+#+end_src
+
+and the modeline and =hl-line-mode=.
+#+begin_src emacs-lisp
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+(add-hook! '+doom-dashboard-mode-hook (hide-mode-line-mode 1) (hl-line-mode -1))
+(setq-hook! '+doom-dashboard-mode-hook evil-normal-state-cursor (list nil))
+#+end_src
+
+** Modules
+If you use `org' and don't want your org files in the default location below,
+change `org-directory'. It must be set before org loads!
+
+#+begin_src emacs-lisp
+(setq org-directory "~/winhome/Sync/org/")
+#+end_src
+
+This determines the style of line numbers in effect. If set to `nil', line
+numbers are disabled. For relative line numbers, set this to `relative'.
+
+#+begin_src emacs-lisp
+(setq display-line-numbers-type 'relative)
+#+end_src
+
+* Package Configuration
+Here are some additional functions/macros that could help you configure Doom:
+
+- `load!' for loading external *.el files relative to this one
+- `use-package!' for configuring packages
+- `after!' for running code after a package has loaded
+- `add-load-path!' for adding directories to the `load-path', relative to
+  this file. Emacs searches the `load-path' when you load packages with
+  `require' or `use-package'.
+- `map!' for binding new keys
+
+To get information about any of these functions/macros, move the cursor over
+the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
+This will open documentation for it, including demos of how they are used.
+
+You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
+they are implemented.
+
+** Company
+#+begin_src emacs-lisp
+(setq company-idle-delay 0)
+#+end_src
+
+** Elfeed
+#+begin_src emacs-lisp
+(setq elfeed-search-filter "@2-days-ago +unread")
+
+(add-hook! 'elfeed-search-mode-hook 'elfeed-update)
+#+end_src
+
+** Ivy
+Center Ivy on window.
+#+begin_src emacs-lisp
+(require 'ivy-posframe)
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+(ivy-posframe-mode 1)
+#+end_src
+
+** doom-modeline
+Customize modules to be like my vim config.
+#+begin_src emacs-lisp
+(after! doom-modeline
+  (setq doom-modeline-bar-width 1)
+  (setq doom-modeline-height 35)
+  (setq doom-modeline-modal-icon nil)
+  (setq doom-modeline-percent-position nil)
+  (setq all-the-icons-scale-factor 0.8))
+  ;; (set-face-attribute 'mode-line nil :family "Iosevka NF" :height 1.0)
+  ;; (set-face-attribute 'mode-line-inactive nil :family "Iosevka NF" :height 1.0))
+#+end_src
+
+** persp-mode
+#+begin_src emacs-lisp
+(after! persp-mode
+  (defun display-workspaces-in-minibuffer ()
+    (with-current-buffer " *Minibuf-0*"
+      (erase-buffer)
+      (insert (+workspace--tabline))))
+  (run-with-idle-timer 1 t #'display-workspaces-in-minibuffer)
+  (+workspace/display))
+#+end_src
+
+** Projectile
+#+begin_src emacs-lisp
+(setq projectile-project-search-path '("~/Projects"))
+#+end_src
+
+** Treemacs
+#+begin_src emacs-lisp
+(after! treemacs
+  (treemacs-filewatch-mode t)
+  (setq treemacs-position 'right
+        treemacs-silent-filewatch t
+        treemacs-silent-refresh t))
+#+end_src
+
+Toggle the symbol viewer.
+#+begin_src emacs-lisp
+(defun lsp-treemacs-symbols-toggle ()
+  "Toggle the lsp-treemacs-symbols buffer."
+  (interactive)
+  (if (get-buffer "*LSP Symbols List*")
+      (kill-buffer "*LSP Symbols List*")
+    (progn (lsp-treemacs-symbols)
+           (other-window -1))))
+#+end_src
+
+Assign =SPC-o-s= to open symbol viewer.
+#+begin_src emacs-lisp
+(map! :leader
+      "o s" 'lsp-treemacs-symbols-toggle)
+#+end_src

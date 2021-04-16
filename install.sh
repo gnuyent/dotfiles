@@ -21,6 +21,7 @@ DNF_REPOS=(
 DNF_PACKAGES=(
 	"aria2"
 	"autoconf"
+	"cmake"
 	"curl"
 	"emacs"
 	"fish"
@@ -28,6 +29,7 @@ DNF_PACKAGES=(
 	"git"
 	"golang"
 	"lldb"
+	"luarocks"
 	"npm"
 	"pandoc"
 	"ripgrep"
