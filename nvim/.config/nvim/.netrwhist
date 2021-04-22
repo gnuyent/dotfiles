@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/invader/.config/fish/conf.d'
+let g:netrw_dirhist_6='/home/invader/.local/share/chezmoi'
+let g:netrw_dirhist_5='/home/invader/notes/school/cs370'
+let g:netrw_dirhist_4='/home/invader/.local/share/chezmoi'
+let g:netrw_dirhist_3='/home/invader/notes'
+let g:netrw_dirhist_2='/home/invader/notes/security'
+let g:netrw_dirhist_1='/home/invader/Projects/sundial/internal/scheduler'
