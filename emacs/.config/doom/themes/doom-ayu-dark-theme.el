@@ -1,4 +1,4 @@
-;;; doom-ayu-dark-theme.el -*- no-byte-compile t; -*-
+;;; doom-ayu-dark-theme.el -*- no-byte-compile: t; -*-
 
 (require 'doom-themes)
 
@@ -188,6 +188,11 @@ determine the exact padding."
    (ivy-minibuffer-match-face-2 :foreground common-accent :weight 'bold)
    (ivy-minibuffer-match-face-3 :foreground common-accent :weight 'bold)
    (ivy-minibuffer-match-face-4 :foreground common-accent :weight 'bold)
+
+   ;;;; helm
+   (helm-ff-dotted-directory :inherit 'syntax-comment)
+   (helm-ff-executable :inhert 'helm-ff-socket :weight 'bold)
+   (helm-selection :inherit 'normal :background 'syntax-entity)
 
    ;; --- major-mode faces -------------------
    ;; css-mode / scss-mode

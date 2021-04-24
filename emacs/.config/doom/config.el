@@ -60,7 +60,7 @@
 (setq doom-font (font-spec :family "Iosevka NF" :size 20)
       doom-variable-pitch-font (font-spec :family "Iosevka NF" :size 20))
 
-(setq doom-theme 'doom-tomorrow-night)
+(setq doom-theme 'doom-ayu-dark)
 
 (defvar fancy-splash-image-template
   (expand-file-name "misc/splash-images/emacs-e-template.svg" doom-private-dir)

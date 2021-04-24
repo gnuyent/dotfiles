@@ -88,14 +88,16 @@ end
 # nmap
 # mega nmap scans and stuff
 if type -q nmap
-	abbr --add osscan 'sudo nmap -T5 -O -v'
-	abbr --add intensetcp 'nmap -p 1-65535 -T5 -A -v'
-	abbr --add intenseall 'sudo nmap -p 1-65535 -sS -sU -T5 -A -v'
-	abbr --add quickscan 'sudo nmap -sV -T4 -O -F -version-light -v'
+	abbr --add nmapos 'sudo nmap -T5 -O -v'
+	abbr --add nmapintensetcp 'nmap -p 1-65535 -T5 -A -v'
+	abbr --add nmapintenseall 'sudo nmap -p 1-65535 -sS -sU -T5 -A -v'
+	abbr --add nmapquick 'sudo nmap -sV -T4 -O -F -version-light -v'
 end
 
 # ifconfig
-abbr --add ifconfig 'ip -c addr'
+if type -q ip
+	alias ip='ip -c'
+end
 
 # DNF upgrade
 abbr --add up 'sudo dnf upgrade --refresh --assumeyes'
@@ -107,15 +109,6 @@ abbr --add myip 'curl https://ipecho.net/plain ; echo'
 
 # Clear
 abbr --add c 'clear'
-
-if type -q chezmoi
-	# c(hezmoi)vim
-	abbr --add cvim 'chezmoi edit --apply'
-	# Chezmoi git add+commit+push
-	abbr --add cpush 'chezmoi git add . && chezmoi git commit && chezmoi git push'
-	# Chezmoi add file
-	abbr --add cadd 'chezmoi add'
-end
 
 # Hash check helpers
 if type -q sha256sum

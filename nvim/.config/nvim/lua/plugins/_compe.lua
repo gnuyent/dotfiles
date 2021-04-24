@@ -14,7 +14,7 @@ function M.config()
       enabled = true,
       autocomplete = true,
       debug = false,
-      min_length = 1,
+      min_length = 2,
       preselect = 'enable',
       throttle_time = 80,
       source_timeout = 200,
@@ -98,7 +98,7 @@ function M.config()
   map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
   map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
   map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-  map("i", "<CR>", "v:lua.completion_confirm()", { expr = true, noremap = true })
+  map("i", "<CR>", "compe#confirm('<CR>')", { expr = true, noremap = true, silent = true })
   map("i", "<C-e>", "compe#close('<C-e>')", { expr = true, noremap = true, silent = true })
 end
 

@@ -144,7 +144,7 @@ available. You can either set `doom-theme' or manually load a theme with the
 `load-theme' function.
 
 #+begin_src emacs-lisp
-(setq doom-theme 'doom-tomorrow-night)
+(setq doom-theme 'doom-ayu-dark)
 #+end_src
 
 Set a pretty Emacs e.

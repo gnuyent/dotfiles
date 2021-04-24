@@ -20,7 +20,7 @@ packer.init {
   compile_path = util.join_paths(vim.fn.stdpath('config'), 'packer', 'packer_compiled.vim')
 }
 
-return packer.startup(function()
+return packer.startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
 
   ----------------------------------------
@@ -132,7 +132,7 @@ return packer.startup(function()
 
   use {
     'kyazdani42/nvim-tree.lua',
-    config = require('plugins/_tree').config,
+    config = require('plugins._tree').config,
   }
 
   use {'tpope/vim-commentary'}
@@ -149,10 +149,7 @@ return packer.startup(function()
 
   use {
     'junegunn/vim-easy-align',
-    config = function()
-      vim.cmd("xmap ga <Plug>(EasyAlign)")
-      vim.cmd("nmap ga <Plug>(EasyAlign)")
-    end
+    config = require("plugins._easyalign").config
   }
 
   use {'axelf4/vim-strip-trailing-whitespace'}
