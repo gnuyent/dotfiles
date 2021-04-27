@@ -10,7 +10,7 @@ function M.config()
     'pandoc',
     'packer',
     'sagahover',
-    'vista'
+    'terminal'
   }
 end
 

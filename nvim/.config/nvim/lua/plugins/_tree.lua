@@ -14,7 +14,7 @@ function M.config()
   g.nvim_tree_hide_dotfiles = 1
   g.nvim_tree_git_hl = 0
   g.nvim_tree_root_folder_modifier = ':~'
-  g.nvim_tree_tab_open = 1
+  g.nvim_tree_tab_open = 0
   g.nvim_tree_width_allow_resize = 1
   g.nvim_tree_disable_netrw = 1
   g.nvim_tree_hijack_netrw = 1
