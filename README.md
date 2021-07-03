@@ -3,7 +3,7 @@
 ## Overview
 
 ### Colors
-[ayu dark](https://github.com/Luxed/ayu-vim) - A dark, modern theme for (neo)vim.
+[gruvbox-material](https://github.com/sainnhe/gruvbox-material) - A modified version of [gruvbox](https://github.com/morhetz/gruvbox) with material palette.
 
 ### Font
 [Iosevka Nerd Font Complete Mono](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Iosevka/Regular/complete) - An open-source, sans-serif + slab-serif, monospace + quasi‑proportional typeface family, designed for writing code, using in terminals, and preparing technical documents.
@@ -11,6 +11,8 @@
 ### Terminal
 
 Linux: [Alacritty](https://github.com/alacritty/alacritty) - A GPU-accelerated, modern terminal emulator that comes with sensible defaults and allows for extensive configuration.
+
+MacOS: [iTerm2](https://iterm2.com/) - A terminal emulator for macOS that does amazing things.
 
 Windows: [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-terminal-preview/) - A new, modern, feature-rich, productive terminal application for command-line users.
 
@@ -45,13 +47,3 @@ Windows: [Windows Terminal Preview](https://www.microsoft.com/en-us/p/windows-te
 * [exa](https://github.com/ogham/exa) - A modern replacement for `ls`.
 * [ripgrep](https://github.com/BurntSushi/ripgrep) - A line-oriented search tool that recursively searches for a regex pattern.
 * [tmux](https://github.com/tmux/tmux) - A terminal multiplexer.
-
-## Installation
-
-First, make sure you are running a recent version of [Fedora](https://getfedora.org/) or [Ubuntu](https://ubuntu.com/).
-
-Then, run the following command:
-
-```shell
-curl -sSL https://raw.githubusercontent.com/gnuyent/dotfiles/master/install.sh | bash
-```

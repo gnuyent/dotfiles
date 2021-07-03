@@ -65,7 +65,6 @@
                 "name": "Command Prompt"
             },
             {
-                "colorScheme": "Ayu Dark",
                 "commandline": "wsl.exe -d fedoraremix",
                 "guid": "{d3f31bee-5823-5ed8-8e04-f31ed54f2cd9}",
                 "hidden": false,
@@ -84,37 +83,11 @@
                 "hidden": false,
                 "name": "kali-linux",
                 "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "colorScheme": "Ayu Dark"
             }
         ]
     },
     "schemes":
     [
-        {
-            "background": "#0F1419",
-            "black": "#00010A",
-            "blue": "#53BDFA",
-            "brightBlack": "#686868",
-            "brightBlue": "#59C2FF",
-            "brightCyan": "#95E6CB",
-            "brightGreen": "#C2D94C",
-            "brightPurple": "#FFEE99",
-            "brightRed": "#F07178",
-            "brightWhite": "#FFFFFF",
-            "brightYellow": "#FFB454",
-            "cursorColor": "#E6B450",
-            "cyan": "#90E1C6",
-            "foreground": "#E6E1CF",
-            "green": "#91B362",
-            "name": "Ayu Dark",
-            "purple": "#FAE994",
-            "red": "#EA6C73",
-            "selectionBackground": "#273747",
-            "white": "#C7C7C7",
-            "yellow": "#F9AF4F"
-        },
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -321,29 +294,6 @@
             "selectionBackground": "#FFFFFF",
             "white": "#C0C0C0",
             "yellow": "#808000"
-        },
-        {
-            "background": "#1D1F21",
-            "black": "#1D1F21",
-            "blue": "#81A2BE",
-            "brightBlack": "#1D1F21",
-            "brightBlue": "#81A2BE",
-            "brightCyan": "#8ABEB7",
-            "brightGreen": "#B5BD68",
-            "brightPurple": "#B294BB",
-            "brightRed": "#CC6666",
-            "brightWhite": "#C5C8C6",
-            "brightYellow": "#F0C674",
-            "cursorColor": "#FFFFFF",
-            "cyan": "#8ABEB7",
-            "foreground": "#C5C8C6",
-            "green": "#B5BD68",
-            "name": "base16-tomorrow-night",
-            "purple": "#B294BB",
-            "red": "#CC6666",
-            "selectionBackground": "#373B41",
-            "white": "#C5C8C6",
-            "yellow": "#F0C674"
         }
     ]
 }

@@ -1,6 +1,3 @@
-local M = {}
-
-function M.config()
   local g = vim.g
   local go = vim.o
   local map = vim.api.nvim_set_keymap
@@ -24,16 +21,17 @@ function M.config()
       max_menu_width = 100,
 
       source = {
-        path = true,
-        buffer = true,
-        calc = true,
-        vsnip = true,
-        nvim_lsp = true,
-        nvim_lua = true,
-        spell = true,
-        tags = true,
+        path = {kind = "   (Path)"},
+        buffer = {kind = "   (Buffer)"},
+        calc = {kind = "   (Calc)"},
+        vsnip = {kind = "   (Snippet)"},
+        nvim_lsp = {kind = "   (LSP)"},
+        nvim_lua = {kind = "  "},
+        spell = {kind = "   (Spell)"},
+        tags = false,
         snippets_nvim = false,
-        treesitter = true,
+        treesitter = {kind = "  "},
+        emoji = {kind = " ﲃ  (Emoji)", filetypes={"markdown", "text"}}
       },
   }
 
@@ -100,6 +98,3 @@ function M.config()
   map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
   map("i", "<CR>", "compe#confirm('<CR>')", { expr = true, noremap = true, silent = true })
   map("i", "<C-e>", "compe#close('<C-e>')", { expr = true, noremap = true, silent = true })
-end
-
-return M

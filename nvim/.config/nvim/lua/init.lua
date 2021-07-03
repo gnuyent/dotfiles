@@ -1,7 +1,3 @@
-local setup = function()
-  require'settings'
-  require'keybinds'
-  require'plugins'
-end
-
-setup()
+require 'settings'
+require 'keybinds'
+require 'plugins'

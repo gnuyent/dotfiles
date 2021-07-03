@@ -1,6 +1,3 @@
-local M = {}
-
-function M.config()
     local opts = {
         -- whether to highlight the currently hovered symbol
         -- disable if your cpu usage is higher than you want it
@@ -21,6 +18,3 @@ function M.config()
     -- Autoclose if last buffer
     vim.cmd(
         "autocmd bufenter * if (winnr('$') == 1 && &filetype =~# 'Outline') | q | endif")
-end
-
-return M

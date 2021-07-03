@@ -26,8 +26,8 @@ function M.config()
   map('n', '<C-p>', ":Telescope find_files<CR>", { noremap = true })
   map('n', '<C-f>', ":Telescope live_grep<CR>", { noremap = true })
   map('n', '<C-b>', ":Telescope buffers<CR>", { noremap = true })
-  map('n', '<leader>fp', ":lua require('plugins._telescope').search_dotfiles()<CR>", { noremap = true })
-  map('n', '<leader>gb', ":lua require('plugins._telescope').git_branches()<CR>", { noremap = true })
+  map('n', '<leader>fp', ":lua require('plugins.telescope').search_dotfiles()<CR>", { noremap = true, silent = true })
+  map('n', '<leader>gb', ":lua require('plugins.telescope').git_branches()<CR>", { noremap = true, silent = true })
 
   require('telescope').setup{
     defaults = {

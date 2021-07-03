@@ -1,6 +1,3 @@
-local M = {}
-
-function M.config()
   local map = vim.api.nvim_set_keymap
   -- Use 'f' and friends to move
   vim.g["sneak#s_next"] = 1
@@ -11,6 +8,3 @@ function M.config()
   -- Disable purple highlighting
   vim.cmd("highlight link Sneak None")
   vim.cmd("autocmd User SneakLeave highlight clear Sneak")
-end
-
-return M

@@ -1,6 +1,3 @@
-local M = {}
-
-function M.config()
   local npairs = require('nvim-autopairs')
   npairs.setup()
   vim.g.completion_confirm_key = ""
@@ -20,6 +17,3 @@ function M.config()
       return npairs.check_break_line_char()
     end
   end
-end
-
-return M

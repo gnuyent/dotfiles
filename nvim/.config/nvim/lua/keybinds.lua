@@ -14,7 +14,7 @@ map('n', 'n', 'nzz', noremap)
 -- New tab
 map('n', '<leader><tab>n', ':tabnew<CR>', opts)
 map('n', '<C-t>', ':tabnew<CR>', opts)
--- Delete this tab
+-- Delete focused tab
 map('n', '<leader><tab>d', ':tabclose<CR>', opts)
 
 --- Terminal

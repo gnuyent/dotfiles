@@ -1,6 +1,3 @@
-local M = {}
-
-function M.config()
   local g = vim.g
 
   vim.api.nvim_set_keymap('n', '<leader>op', ':NvimTreeToggle<CR>', {})
@@ -25,6 +22,3 @@ function M.config()
       folders = 1,
       files = 1,
   }
-end
-
-return M

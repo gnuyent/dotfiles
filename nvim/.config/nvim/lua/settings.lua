@@ -9,7 +9,6 @@ if vim.fn.has('nvim') == 1 then
   go.termguicolors = true
 end
 
--- Boolean values
 go.autowrite = true -- Automatically write buffers when not focused
 
 go.ignorecase = true -- case insensitive on search
@@ -39,7 +38,6 @@ go.cmdheight = 1 -- Space for message displays
 
 go.updatetime = 100 -- 100ms, less delays and better UX
 
--- Don't pass messages to |ins-completion-menu|
 go.clipboard = "unnamedplus"
 
 -- Filetype plugins

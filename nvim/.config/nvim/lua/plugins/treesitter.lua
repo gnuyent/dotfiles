@@ -1,6 +1,3 @@
-local M = {}
-
-function M.config()
   local ts = require("nvim-treesitter.configs")
 
   ts.setup {
@@ -13,6 +10,3 @@ function M.config()
       enable = true,
     }
   }
-end
-
-return M
