@@ -11,39 +11,36 @@ set --export DOOMLOCALDIR $HOME/.config/emacs/.local
 set --export Z_CMD "j"
 
 ##### Path Sourcing
-# Custom home bin
-if test -e $HOME/.local/bin
-    set PATH $HOME/.local/bin $PATH
-end
-
+set paths
+# Custom homedir bin
+set --append paths $HOME/.local/bin
 # Luarocks
-if test -e $HOME/.luarocks/bin
-    set PATH $HOME/.luarocks/bin $PATH
-end
-
+set --append paths $HOME/.luarocks/bin
 # Rust
-if test -e $HOME/.cargo/bin
-    set PATH $HOME/.cargo/bin $PATH
-end
-
+set --append paths $HOME/.cargo/bin
 # Go
-if test -e $HOME/go/bin
-    set PATH $HOME/go/bin $PATH
+set --append paths $HOME/go/bin
+# .NET
+set --append paths $HOME/.dotnet
+# Doom Emacs
+set --append paths $HOME/.config/emacs/bin
+
+for dir in $paths
+	if test -e $dir
+	    set PATH $dir $PATH
+	end
 end
 
-# Dotnet
-if test -e $HOME/.dotnet
-    set PATH $HOME/.dotnet $PATH
-end
+set -e paths
 
-# Doom emacs
-if test -e $HOME/.config/emacs/bin
-    set PATH $HOME/.config/emacs/bin $PATH
-end
-
+##### File Sourcing
 # asdf
 if test -e $HOME/.asdf
-    source $HOME/.asdf/asdf.fish
+	#source $HOME/.asdf/asdf.fish
+end
+# Work
+if test -e $HOME/.config/fish/work.fish
+	source $HOME/.config/fish/work.fish
 end
 
 ##### Command Abbreviations
@@ -57,25 +54,25 @@ end
 
 # git
 if type -q git
-	abbr ga 'git add'
-	abbr gcl 'git clone'
-	abbr gcm 'git commit -m'
-	abbr gst 'git status'
-	abbr gco 'git checkout'
-	abbr glog 'git log'
-	abbr gcob 'git checkout -b'
-	abbr gdel 'git branch -D'
-	abbr greb 'git rebase -i'
-	abbr hotedit 'git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10'
+	abbr --global ga 'git add'
+	abbr --global gcl 'git clone'
+	abbr --global gcm 'git commit -m'
+	abbr --global gst 'git status'
+	abbr --global gco 'git checkout'
+	abbr --global glog 'git log'
+	abbr --global gcob 'git checkout -b'
+	abbr --global gdel 'git branch -D'
+	abbr --global greb 'git rebase -i'
+	abbr --global hotedit 'git log --pretty=format: --name-only | sort | uniq -c | sort -rg | head -10'
 end
 
 # Docker
 if type -q docker
-	abbr dup 'docker compose up --detach'
-	abbr ddown 'docker compose down'
-	abbr dstart 'docker compose start'
-	abbr dstop 'docker compose stop'
-	abbr dlogs 'docker compose logs --follow --timestamps'
+	abbr --global dup 'docker compose up --detach'
+	abbr --global ddown 'docker compose down'
+	abbr --global dstart 'docker compose start'
+	abbr --global dstop 'docker compose stop'
+	abbr --global dlogs 'docker compose logs --follow --timestamps'
 end
 
 # grep
@@ -102,10 +99,10 @@ end
 
 # nmap
 if type -q nmap
-	abbr --add nmapos 'sudo nmap -T5 -O -v'
-	abbr --add nmapintensetcp 'nmap -p 1-65535 -T5 -A -v'
-	abbr --add nmapintenseall 'sudo nmap -p 1-65535 -sS -sU -T5 -A -v'
-	abbr --add nmapquick 'sudo nmap -sV -T4 -O -F -version-light -v'
+	abbr --global scanos 'sudo nmap -T5 -O -v'
+	abbr --global scanintensetcp 'nmap -p 1-65535 -T5 -A -v'
+	abbr --global scanintenseall 'sudo nmap -p 1-65535 -sS -sU -T5 -A -v'
+	abbr --global scanquick 'sudo nmap -sV -T4 -O -F -version-light -v'
 end
 
 # ifconfig
@@ -115,24 +112,25 @@ end
 
 # Hash check helpers
 if type -q sha256sum
-	abbr --add sha256 'echo "$argv[1] $argv[2]" | sha256sum --check'
+	alias sha256='echo "$argv[1] $argv[2]" | sha256sum --check'
 end
 
 if type -q md5sum
-	abbr --add sha256 'echo "$argv[1] $argv[2]" | md5sum --check'
+	alias md5='echo "$argv[1] $argv[2]" | md5sum --check'
 end
 
 ##### Abbreviations
 # dnf upgrade
-abbr --add up 'sudo dnf upgrade --refresh --assumeyes'
+abbr --global up 'sudo dnf upgrade --refresh --assumeyes'
 
 # Get current ip
-abbr --add myip 'curl https://ipecho.net/plain ; echo'
+abbr --global myip 'curl https://ipecho.net/plain ; echo'
 
 # Clear
-abbr --add c 'clear'
+abbr --global c 'clear'
 
-abbr -- - 'cd -'
+# Git shorter
+abbr --global g 'git'
 
 ##### Functions
 # ctrl+z
@@ -140,11 +138,11 @@ function fish_user_key_bindings
     bind \cz 'fg 2>/dev/null; commandline -f repaint'
 end
 
-# cowsay
+# Terminal greeting
 function fish_greeting
 	if type -q fortune && type -q cowsay
 		fortune | cowsay
 	end
-	# Go $HOME since WSL goes to the 'windows' home directory instead
+	# Go $HOME since WSL starts in windows "home" dir
 	cd $HOME
 end
