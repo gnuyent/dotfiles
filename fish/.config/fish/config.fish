@@ -36,7 +36,7 @@ set -e paths
 ##### File Sourcing
 # asdf
 if test -e $HOME/.asdf
-	#source $HOME/.asdf/asdf.fish
+	source $HOME/.asdf/asdf.fish
 end
 # Work
 if test -e $HOME/.config/fish/work.fish
@@ -140,6 +140,7 @@ end
 
 # Terminal greeting
 function fish_greeting
+	clear
 	if type -q fortune && type -q cowsay
 		fortune | cowsay
 	end
