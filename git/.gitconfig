@@ -1,7 +1,0 @@
-[user]
-	email = gnuyent@protonmail.com
-	name = Brandon Nguyen
-[commit]
-	template = ~/.config/git/.git-commit-message
-[core]
-	editor = nvim

@@ -1,2 +1,3 @@
 .nvimlog
 fish/.config/fish/work.fish
+packer_compiled.lua
