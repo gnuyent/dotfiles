@@ -10,7 +10,7 @@ go.smartcase = true -- unless there is a capital in the search
 wo.number = true -- line numbers
 wo.relativenumber = true -- relative line numbers
 
-wo.wrap = false -- disable line wrapping
+wo.wrap = true -- enable line wrapping
 
 go.showmode = false -- Hide mode text because statusline does it already
 
@@ -23,6 +23,17 @@ go.updatetime = 100 -- 100ms, less delays and better UX
 
 go.splitright = true -- vertical split to the right
 go.splitbelow = true -- horizontal split to the bottom
+
+-- Highlight on yank
+vim.api.nvim_exec(
+	[[
+  augroup YankHighlight
+    autocmd!
+    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+  augroup end
+]],
+	false
+)
 
 -- Filetype plugins
 cmd("filetype plugin indent on")
