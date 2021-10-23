@@ -1,11 +1,8 @@
 local cmp = require("cmp")
-local lspinstall = require("lspinstall")
 local luasnip = require("luasnip")
+local lsp_installer = require("nvim-lsp-installer")
 local nvim_lsp = require("lspconfig")
 local wk = require("which-key")
-
--- lspinstall --
-lspinstall.setup()
 
 -- lspconfig --
 local on_attach = function(_, bufnr)
@@ -23,9 +20,9 @@ local on_attach = function(_, bufnr)
 		},
 		["]d"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Go to next diagnostic", buffer = bufnr },
 		["[d"] = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "Go to next diagnostic", buffer = bufnr },
-		c = {
+		["<leader>c"] = {
 			name = "code",
-			a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "View code actions", buffer = bufnr },
+			a = { "<cmd>CodeActionMenu<CR>", "View code actions", buffer = bufnr },
 			l = {
 				"<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>",
 				"Add buffer diagnostics to location list",
@@ -54,18 +51,37 @@ local on_attach = function(_, bufnr)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
+-- on_attach with no LSP formatting (prefer null-ls)
+local on_attach_disable_formatting = function(client)
+	client.resolved_capabilities.document_formatting = false
+	client.resolved_capabilities.document_range_formatting = false
+	return on_attach(client)
+end
+
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
--- Enable the following language servers
-local servers = lspinstall.installed_servers()
-for _, server in pairs(servers) do
-	nvim_lsp[server].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
+local set = function(...)
+	local ret = {}
+	for _, k in ipairs({ ... }) do
+		ret[k] = true
+	end
+	return ret
 end
+local no_format_servers = set("clangd")
+
+lsp_installer.on_server_ready(function(server)
+	local opts = { on_attach = on_attach }
+
+	if no_format_servers[server.name] then
+		opts = { on_attach = on_attach_disable_formatting }
+	end
+
+	-- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
+	server:setup(opts)
+	vim.cmd([[ do User LspAttachBuffers ]])
+end)
 
 -- Make runtime files discoverable to the server
 local runtime_path = vim.split(package.path, ";")
@@ -73,7 +89,7 @@ table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 -- Some special lua setup
-nvim_lsp.lua.setup({
+nvim_lsp.sumneko_lua.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
@@ -107,7 +123,7 @@ vim.o.completeopt = "menuone,noselect"
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
+			luasnip.lsp_expand(args.body)
 		end,
 	},
 	mapping = {
@@ -125,7 +141,7 @@ cmp.setup({
 			if cmp.visible() then
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+				luasnip.expand_or_jump()
 			else
 				fallback()
 			end
@@ -134,7 +150,7 @@ cmp.setup({
 			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif luasnip.jumpable(-1) then
-				vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+				luasnip.jump(-1)
 			else
 				fallback()
 			end

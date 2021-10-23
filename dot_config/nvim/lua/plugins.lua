@@ -19,59 +19,58 @@ packer.init()
 
 return packer.startup(function(use)
 	use({ "wbthomason/packer.nvim", opt = true })
-	use("kyazdani42/nvim-web-devicons")
-	use({ "shadmansaleh/lualine.nvim", config = [[require("config.lualine")]] }) -- FIXME: Use fork while master isn't active
+	use({ "kyazdani42/nvim-web-devicons" })
+	use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		config = [[require("config.indent-blankline")]],
 	})
+	-- Treesitter --
 	use({
 		"nvim-treesitter/nvim-treesitter",
-		requires = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"romgrk/nvim-treesitter-context",
-			"JoosepAlviste/nvim-ts-context-commentstring",
-		},
 		run = ":TSUpdate",
-		config = [[require("treesitter")]],
+		config = [[require("config.treesitter")]],
 	})
+	use({ "nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter" })
+	use({ "romgrk/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
+	use({ "JoosepAlviste/nvim-ts-context-commentstring", requires = "nvim-treesitter/nvim-treesitter" })
+	-- Telescope --
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { "nvim-lua/plenary.nvim", { "nvim-telescope/telescope-fzf-native.nvim", run = "make" } },
+		requires = { "nvim-lua/plenary.nvim" },
 		config = [[require("config.telescope")]],
 	})
-	use("tpope/vim-commentary")
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	-- LSP
+	use({
+		"neovim/nvim-lspconfig",
+		config = [[require("config.lsp")]],
+	})
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = [[require("config.null-ls")]],
 		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 	})
+	use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = "jose-elias-alvarez/null-ls.nvim" })
+	-- nvim-cmp
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("saadparwaiz1/cmp_luasnip")
+	use("L3MON4D3/LuaSnip")
+	use("rafamadriz/friendly-snippets")
+	use("williamboman/nvim-lsp-installer")
+	-- Git
 	use({
 		"TimUntersberger/neogit",
 		requires = "nvim-lua/plenary.nvim",
 		config = [[require("neogit").setup({})]],
 	})
 	use({
-		"neovim/nvim-lspconfig",
-		requires = {
-			"hrsh7th/nvim-cmp",
-			"hrsh7th/cmp-nvim-lsp",
-			"saadparwaiz1/cmp_luasnip",
-			"L3MON4D3/LuaSnip",
-			"rafamadriz/friendly-snippets",
-			"kabouzeid/nvim-lspinstall",
-		},
-		config = [[require("lsp")]],
-	})
-	use({
 		"lewis6991/gitsigns.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
+		requires = "nvim-lua/plenary.nvim",
 		config = [[require("gitsigns").setup({keymaps={}})]],
 	})
-	use("ggandor/lightspeed.nvim")
-	use("Pocco81/Catppuccino.nvim")
+	use({ "ggandor/lightspeed.nvim" })
 	use({
 		"simrat39/symbols-outline.nvim",
 		config = [[require("config.symbols-outline")]],
@@ -79,10 +78,18 @@ return packer.startup(function(use)
 	use({
 		"luukvbaal/nnn.nvim",
 		config = [[require("nnn").setup()]],
+		commit = "8304de7f2f4dce741c8cf1e2272efaeddb643c98",
 	})
 	use({
 		"windwp/nvim-autopairs",
 		config = [[require("nvim-autopairs").setup()]],
 	})
 	use({ "folke/which-key.nvim", config = [[require("config.which-key")]] })
+	use({ "numToStr/Comment.nvim", config = [[ require("Comment").setup()]] })
+	use({
+		"weilbith/nvim-code-action-menu",
+		cmd = "CodeActionMenu",
+	})
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use({ "Pocco81/Catppuccino.nvim", config = [[require("config.theme")]] })
 end)

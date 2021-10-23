@@ -2,6 +2,7 @@
 set --export SHELL /opt/homebrew/bin/fish
 set --export BAT_THEME ansi
 set --export EDITOR nvim
+set --export VISUAL nvim
 set --export MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set --export MANROFFOPT "-c"
 set --export FZF_DEFAULT_COMMAND "fd"
@@ -132,9 +133,6 @@ if type -q md5sum
 end
 
 ##### Abbreviations
-# dnf upgrade
-abbr --global up 'sudo dnf upgrade --refresh --assumeyes'
-
 # Get current ip
 abbr --global myip 'curl https://ipecho.net/plain ; echo'
 
@@ -144,10 +142,17 @@ abbr --global c 'clear'
 # Git shorter
 abbr --global g 'git'
 
+# Use vi-like bindings
+fish_vi_key_bindings
+
 ##### Functions
-# ctrl+z
 function fish_user_key_bindings
-    bind \cz 'fg 2>/dev/null; commandline -f repaint'
+# ctrl+z - quick bg and fg
+    bind -M insert \cz 'fg 2>/dev/null; commandline -f repaint'
+    bind -M insert \cp 'up-or-search'
+    bind -M insert \cn 'down-or-search'
+    bind -M insert \ca 'beginning-of-line'
+    bind -M insert \ce 'end-of-line'
 end
 
 # Terminal greeting
