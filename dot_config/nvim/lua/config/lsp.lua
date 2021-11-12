@@ -2,6 +2,7 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 local lsp_installer = require("nvim-lsp-installer")
 local nvim_lsp = require("lspconfig")
+local null_ls = require("null-ls")
 local wk = require("which-key")
 
 -- lspconfig --
@@ -51,13 +52,6 @@ local on_attach = function(_, bufnr)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 
--- on_attach with no LSP formatting (prefer null-ls)
-local on_attach_disable_formatting = function(client)
-	client.resolved_capabilities.document_formatting = false
-	client.resolved_capabilities.document_range_formatting = false
-	return on_attach(client)
-end
-
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -70,51 +64,71 @@ local set = function(...)
 	return ret
 end
 local no_format_servers = set("clangd")
-
-lsp_installer.on_server_ready(function(server)
-	local opts = { on_attach = on_attach }
-
-	if no_format_servers[server.name] then
-		opts = { on_attach = on_attach_disable_formatting }
-	end
-
-	-- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
-	server:setup(opts)
-	vim.cmd([[ do User LspAttachBuffers ]])
-end)
-
 -- Make runtime files discoverable to the server
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
--- Some special lua setup
-nvim_lsp.sumneko_lua.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			runtime = {
-				-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-				version = "LuaJIT",
-				-- Setup your lua path
-				path = runtime_path,
+lsp_installer.on_server_ready(function(server)
+	local opts = { on_attach = on_attach }
+
+	if no_format_servers[server.name] then
+		opts = {
+			on_attach = function(client)
+				client.resolved_capabilities.document_formatting = false
+				client.resolved_capabilities.document_range_formatting = false
+			end,
+		}
+	elseif server.name == "sumneko_lua" then
+		opts.capabilities = capabilities
+		opts.settings = {
+			Lua = {
+				runtime = {
+					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+					version = "LuaJIT",
+					-- Setup your lua path
+					path = runtime_path,
+				},
+				diagnostics = {
+					-- Get the language server to recognize the `vim` global
+					globals = { "vim" },
+				},
+				workspace = {
+					-- Make the server aware of Neovim runtime files
+					library = vim.api.nvim_get_runtime_file("", true),
+				},
+				-- Do not send telemetry data containing a randomized but unique identifier
+				telemetry = {
+					enable = false,
+				},
 			},
-			diagnostics = {
-				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
-			},
-			workspace = {
-				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			-- Do not send telemetry data containing a randomized but unique identifier
-			telemetry = {
-				enable = false,
-			},
-		},
+		}
+	end
+
+	-- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
+	server:setup(opts)
+end)
+
+-- null-ls
+null_ls.config({
+	sources = {
+		null_ls.builtins.code_actions.gitsigns,
+		null_ls.builtins.diagnostics.shellcheck,
+		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.clang_format,
+		null_ls.builtins.formatting.eslint,
+		null_ls.builtins.formatting.fnlfmt,
+		null_ls.builtins.formatting.goimports,
+		null_ls.builtins.formatting.isort,
+		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.shellharden,
+		null_ls.builtins.formatting.shfmt,
+		null_ls.builtins.formatting.stylelint,
+		null_ls.builtins.formatting.stylua,
 	},
 })
+
+nvim_lsp["null-ls"].setup({})
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"

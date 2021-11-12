@@ -1,31 +1,37 @@
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
-
--- Bootstrap packer if not installed
-if fn.empty(fn.glob(install_path)) > 0 then
-	execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-end
-
-execute("packadd packer.nvim")
-
 local packer = require("packer")
 
 -- Automatically recompile on file save.
-execute("autocmd BufWritePost plugins.lua PackerCompile")
+vim.cmd("autocmd BufWritePost plugins.lua PackerCompile")
 
-packer.init()
+packer.init({
+	git = { clone_timeout = 300 },
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "rounded" })
+		end,
+	},
+})
 
 return packer.startup(function(use)
-	use({ "wbthomason/packer.nvim", opt = true })
-	use({ "kyazdani42/nvim-web-devicons" })
-	use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
+	--- Essentials
+	-- Plugin Manager
+	use({ "wbthomason/packer.nvim" })
+	-- Fennel Configuration
 	use({
-		"lukas-reineke/indent-blankline.nvim",
-		config = [[require("config.indent-blankline")]],
+		"rktjmp/hotpot.nvim",
+		-- packer says this is "code to run after this plugin is loaded."
+		-- but it seems to run before plugin/hotpot.vim (perhaps just barely)
+		config = [[require("hotpot")]],
 	})
-	-- Treesitter --
+	use({ "tsbohc/zest.nvim", config = [[require("zest").setup()]] })
+	--- Aesthetic
+	-- Icons
+	use({ "kyazdani42/nvim-web-devicons" })
+	-- Colorscheme
+	use({ "projekt0n/github-nvim-theme", config = [[require("config.theme")]] })
+	-- Statusline
+	use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
+	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
@@ -34,31 +40,36 @@ return packer.startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter" })
 	use({ "romgrk/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
 	use({ "JoosepAlviste/nvim-ts-context-commentstring", requires = "nvim-treesitter/nvim-treesitter" })
-	-- Telescope --
+	-- Indent Guides
 	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-		config = [[require("config.telescope")]],
+		"lukas-reineke/indent-blankline.nvim",
+		config = [[require("config.indent-blankline")]],
 	})
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-	-- LSP
+	-- Code Action Menu
 	use({
-		"neovim/nvim-lspconfig",
-		config = [[require("config.lsp")]],
+		"weilbith/nvim-code-action-menu",
+		cmd = "CodeActionMenu",
 	})
+
+	--- Actions
 	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		config = [[require("config.null-ls")]],
-		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		"folke/which-key.nvim",
+		config = [[require("config.which-key")]],
+		event = "BufWinEnter",
 	})
-	use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = "jose-elias-alvarez/null-ls.nvim" })
-	-- nvim-cmp
-	use("hrsh7th/nvim-cmp")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("saadparwaiz1/cmp_luasnip")
-	use("L3MON4D3/LuaSnip")
-	use("rafamadriz/friendly-snippets")
-	use("williamboman/nvim-lsp-installer")
+	use({ "ggandor/lightspeed.nvim" })
+	use({ "numToStr/Comment.nvim", config = [[ require("Comment").setup()]] })
+	use({
+		"windwp/nvim-autopairs",
+		config = [[require("nvim-autopairs").setup()]],
+	})
+
+	--- Integration
+	-- nnn
+	use({
+		"luukvbaal/nnn.nvim",
+		config = [[require("nnn").setup()]],
+	})
 	-- Git
 	use({
 		"TimUntersberger/neogit",
@@ -69,27 +80,47 @@ return packer.startup(function(use)
 		"lewis6991/gitsigns.nvim",
 		requires = "nvim-lua/plenary.nvim",
 		config = [[require("gitsigns").setup({keymaps={}})]],
+		event = "BufRead",
 	})
-	use({ "ggandor/lightspeed.nvim" })
+
+	--- Language Server Protocol (LSP)
+	-- Configuration
+	use({ "neovim/nvim-lspconfig", config = [[require("config.lsp")]], after = "which-key.nvim" })
+	-- Non-LSP integration
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+	})
+	use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = "jose-elias-alvarez/null-ls.nvim" })
+	-- Completion Engine
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("saadparwaiz1/cmp_luasnip")
+	-- Snippets
+	use("L3MON4D3/LuaSnip")
+	use("rafamadriz/friendly-snippets")
+	-- LSP Server Installer
+	use("williamboman/nvim-lsp-installer")
+
+	--- Files and Directories
+	-- Fuzzy Finder
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = [[require("config.telescope")]],
+	})
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+
+	-- Symbol Outline
 	use({
 		"simrat39/symbols-outline.nvim",
 		config = [[require("config.symbols-outline")]],
 	})
+
+	--- Debugging
 	use({
-		"luukvbaal/nnn.nvim",
-		config = [[require("nnn").setup()]],
-		commit = "8304de7f2f4dce741c8cf1e2272efaeddb643c98",
+		"rcarriga/nvim-dap-ui",
+		requires = { "mfussenegger/nvim-dap", "Pocco81/DAPInstall.nvim" },
+		config = [[require("config.dap")]],
 	})
-	use({
-		"windwp/nvim-autopairs",
-		config = [[require("nvim-autopairs").setup()]],
-	})
-	use({ "folke/which-key.nvim", config = [[require("config.which-key")]] })
-	use({ "numToStr/Comment.nvim", config = [[ require("Comment").setup()]] })
-	use({
-		"weilbith/nvim-code-action-menu",
-		cmd = "CodeActionMenu",
-	})
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use({ "Pocco81/Catppuccino.nvim", config = [[require("config.theme")]] })
 end)

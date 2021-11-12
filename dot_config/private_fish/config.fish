@@ -22,7 +22,7 @@ set --append paths $HOME/go/bin
 # .NET
 set --append paths $HOME/.dotnet
 # Doom Emacs
-set --append paths $HOME/.config/emacs/bin
+set --append paths $HOME/.emacs.d/bin
 # Homebrew
 set --append paths /opt/homebrew/bin
 # asdf
@@ -130,6 +130,12 @@ end
 
 if type -q md5sum
 	alias md5='echo "$argv[1] $argv[2]" | md5sum --check'
+end
+
+# Chezmoi
+if type -q chezmoi
+	alias czm='chezmoi'
+	abbr --global ccd 'chezmoi cd' 
 end
 
 ##### Abbreviations
