@@ -1,5 +1,9 @@
 ##### Environment Variables
-set --export SHELL /opt/homebrew/bin/fish
+if test -e /opt/homebrew/bin/fish
+	set --export SHELL /opt/homebrew/bin/fish
+else
+	set --export SHELL /usr/sbin/fish
+end
 set --export BAT_THEME ansi
 set --export EDITOR nvim
 set --export VISUAL nvim
@@ -41,6 +45,10 @@ set -e paths
 if test -e $HOME/.asdf/asdf.fish
 	source $HOME/.asdf/asdf.fish
 end
+if test -e /opt/asdf-vm/asdf.fish
+	source /opt/asdf-vm/asdf.fish
+end
+
 # Work
 if test -e $HOME/.config/fish/work.fish
 	source $HOME/.config/fish/work.fish
