@@ -1,0 +1,15 @@
+{{ if (eq .chezmoi.os "darwin") }}
+disable = ["git_repos", "gem", "node", "tlmgr", "pip3", "system", "gnome_shell_extensions", "chezmoi", "vim"]
+
+[commands]
+"Neovim HEAD" = "brew reinstall neovim"
+
+[brew]
+greedy_cask = true
+
+[firmware]
+# Offer to update firmware; if false just check for and display available updates
+upgrade = false
+{{ else }}
+disable = ["git_repos", "gem", "node", "tlmgr", "pip3", "gnome_shell_extensions", "chezmoi", "vim"]
+{{ end }}
