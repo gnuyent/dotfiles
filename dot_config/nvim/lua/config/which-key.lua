@@ -18,7 +18,8 @@ wk.register({
 		},
 		o = {
 			name = "open",
-			-- s = { "<cmd>SymbolsOutline<CR>", "Symbol Outline" },
+			g = { "<cmd>LazyGit<CR>", "LazyGit" },
+			s = { "<cmd>SymbolsOutline<CR>", "Symbol Outline" },
 			p = { "<cmd>NnnPicker<CR>", "nnn" },
 		},
 		s = {

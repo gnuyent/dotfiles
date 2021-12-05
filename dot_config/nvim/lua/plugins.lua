@@ -82,6 +82,7 @@ return packer.startup(function(use)
 		config = [[require("gitsigns").setup({keymaps={}})]],
 		event = "BufRead",
 	})
+	use({ "kdheepak/lazygit.nvim", after = "which-key.nvim" })
 
 	--- Language Server Protocol (LSP)
 	-- Configuration
@@ -112,10 +113,10 @@ return packer.startup(function(use)
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 	-- Symbol Outline
-	-- use({
-	-- 	"simrat39/symbols-outline.nvim",
-	-- 	config = [[require("config.symbols-outline")]],
-	-- })
+	use({
+		"simrat39/symbols-outline.nvim",
+		config = [[require("config.symbols-outline")]],
+	})
 
 	--- Debugging
 	use({

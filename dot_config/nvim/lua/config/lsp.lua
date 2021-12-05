@@ -114,6 +114,7 @@ end)
 null_ls.config({
 	sources = {
 		null_ls.builtins.code_actions.gitsigns,
+		null_ls.builtins.diagnostics.ansiblelint,
 		null_ls.builtins.diagnostics.shellcheck,
 		null_ls.builtins.formatting.black,
 		null_ls.builtins.formatting.clang_format,
