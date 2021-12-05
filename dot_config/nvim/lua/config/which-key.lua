@@ -18,7 +18,7 @@ wk.register({
 		},
 		o = {
 			name = "open",
-			s = { "<cmd>SymbolsOutline<CR>", "Symbol Outline" },
+			-- s = { "<cmd>SymbolsOutline<CR>", "Symbol Outline" },
 			p = { "<cmd>NnnPicker<CR>", "nnn" },
 		},
 		s = {

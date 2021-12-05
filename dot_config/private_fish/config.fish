@@ -10,8 +10,6 @@ set --export VISUAL nvim
 set --export MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set --export MANROFFOPT "-c"
 set --export FZF_DEFAULT_COMMAND "fd"
-# Rebind z plugin key
-set --export Z_CMD "j"
 
 ##### Path Sourcing
 set paths
@@ -39,6 +37,8 @@ for dir in $paths
 end
 
 set -e paths
+
+zoxide init fish | source
 
 ##### File Sourcing
 # asdf

@@ -63,7 +63,8 @@ local set = function(...)
 	end
 	return ret
 end
-local no_format_servers = set("clangd")
+-- local no_format_servers = set("clangd")
+local no_format_servers = set()
 -- Make runtime files discoverable to the server
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")

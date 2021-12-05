@@ -28,7 +28,7 @@ return packer.startup(function(use)
 	-- Icons
 	use({ "kyazdani42/nvim-web-devicons" })
 	-- Colorscheme
-	use({ "projekt0n/github-nvim-theme", config = [[require("config.theme")]] })
+	use({ "olimorris/onedarkpro.nvim", config = [[require("config.theme")]] })
 	-- Statusline
 	use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
 	-- Treesitter
@@ -57,7 +57,7 @@ return packer.startup(function(use)
 		config = [[require("config.which-key")]],
 		event = "BufWinEnter",
 	})
-	use({ "ggandor/lightspeed.nvim" })
+	use({ "phaazon/hop.nvim", config = [[require("config.hop")]] })
 	use({ "numToStr/Comment.nvim", config = [[ require("Comment").setup()]] })
 	use({
 		"windwp/nvim-autopairs",
@@ -112,10 +112,10 @@ return packer.startup(function(use)
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 	-- Symbol Outline
-	use({
-		"simrat39/symbols-outline.nvim",
-		config = [[require("config.symbols-outline")]],
-	})
+	-- use({
+	-- 	"simrat39/symbols-outline.nvim",
+	-- 	config = [[require("config.symbols-outline")]],
+	-- })
 
 	--- Debugging
 	use({

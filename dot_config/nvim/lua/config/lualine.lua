@@ -12,8 +12,7 @@ end
 
 lualine.setup({
 	options = {
-		-- theme = "catppuccino",
-		theme = "github",
+		theme = "onedarkpro",
 		section_separators = { left = "", right = "" },
 		component_separators = { left = "|", right = "|" },
 		icons_enabled = true,
