@@ -54,4 +54,8 @@ ts.setup({
 	context_commentstring = {
 		enable = true,
 	},
+	rainbow = {
+		enable = true,
+		extended_mode = true,
+	},
 })

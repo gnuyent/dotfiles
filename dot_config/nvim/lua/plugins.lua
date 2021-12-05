@@ -28,7 +28,7 @@ return packer.startup(function(use)
 	-- Icons
 	use({ "kyazdani42/nvim-web-devicons" })
 	-- Colorscheme
-	use({ "olimorris/onedarkpro.nvim", config = [[require("config.theme")]] })
+	use({ "catppuccin/nvim", config = [[require("config.theme")]] })
 	-- Statusline
 	use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
 	-- Treesitter
@@ -40,6 +40,7 @@ return packer.startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter" })
 	use({ "romgrk/nvim-treesitter-context", requires = "nvim-treesitter/nvim-treesitter" })
 	use({ "JoosepAlviste/nvim-ts-context-commentstring", requires = "nvim-treesitter/nvim-treesitter" })
+	use({ "p00f/nvim-ts-rainbow", requires = "nvim-treesitter/nvim-treesitter" })
 	-- Indent Guides
 	use({
 		"lukas-reineke/indent-blankline.nvim",

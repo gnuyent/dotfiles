@@ -1,8 +1,8 @@
-local onedarkpro = require("onedarkpro")
+local catppuccin = require("catppuccin")
 
 vim.o.termguicolors = true
 vim.cmd("set background=dark")
-onedarkpro.setup({
+catppuccin.setup({
 	styles = {
 		strings = "NONE",
 		comments = "NONE",
@@ -10,8 +10,28 @@ onedarkpro.setup({
 		functions = "bold",
 		variables = "bold",
 	},
-	options = {
-		italic = false,
+	integrations = {
+		native_lsp = {
+			enabled = true,
+			virtual_text = {
+				errors = "bold",
+				hints = "bold",
+				warnings = "bold",
+				information = "NONE",
+			},
+			underlines = {
+				errors = "underline",
+				hints = "underline",
+				warnings = "underline",
+				information = "underline",
+			},
+		},
+		gitsigns = true,
+		telescope = true,
+		which_key = true,
+		neogit = true,
+		ts_rainbow = true,
+		hop = true,
 	},
 })
-onedarkpro.load()
+vim.cmd("colorscheme catppuccin")
