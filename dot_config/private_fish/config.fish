@@ -45,6 +45,7 @@ zoxide init fish | source
 if test -e $HOME/.asdf/asdf.fish
 	source $HOME/.asdf/asdf.fish
 end
+
 if test -e /opt/asdf-vm/asdf.fish
 	source /opt/asdf-vm/asdf.fish
 end
@@ -98,7 +99,7 @@ end
 
 # cat
 if type -q bat
-	alias cat='bat -p'
+	alias cat='bat --paging=never'
 end
 
 # vim
