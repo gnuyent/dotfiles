@@ -28,7 +28,7 @@ return packer.startup(function(use)
 	-- Icons
 	use({ "kyazdani42/nvim-web-devicons" })
 	-- Colorscheme
-	use({ "catppuccin/nvim", config = [[require("config.theme")]] })
+	use({ "Shatur/neovim-ayu", config = [[require("config.theme")]] })
 	-- Statusline
 	use({ "nvim-lualine/lualine.nvim", config = [[require("config.lualine")]] })
 	-- Treesitter

@@ -147,6 +147,11 @@ if type -q chezmoi
 	abbr --global ccd 'chezmoi cd' 
 end
 
+# LazyGit
+if type -q lazygit
+	alias lg='lazygit'
+end
+
 ##### Abbreviations
 # Get current ip
 abbr --global myip 'curl https://ipecho.net/plain ; echo'

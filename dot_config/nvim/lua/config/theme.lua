@@ -1,37 +1,10 @@
-local catppuccin = require("catppuccin")
+local ayu = require("ayu")
 
 vim.o.termguicolors = true
 vim.cmd("set background=dark")
-catppuccin.setup({
-	styles = {
-		strings = "NONE",
-		comments = "NONE",
-		keywords = "bold",
-		functions = "bold",
-		variables = "bold",
-	},
-	integrations = {
-		native_lsp = {
-			enabled = true,
-			virtual_text = {
-				errors = "bold",
-				hints = "bold",
-				warnings = "bold",
-				information = "NONE",
-			},
-			underlines = {
-				errors = "underline",
-				hints = "underline",
-				warnings = "underline",
-				information = "underline",
-			},
-		},
-		gitsigns = true,
-		telescope = true,
-		which_key = true,
-		neogit = true,
-		ts_rainbow = true,
-		hop = true,
-	},
+vim.cmd("colorscheme ayu")
+
+ayu.setup({
+	mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+	overrides = {}, -- A dictionary with a group names associated with a dictionary with parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
 })
-vim.cmd("colorscheme catppuccin")
