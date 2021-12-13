@@ -111,7 +111,7 @@ lsp_installer.on_server_ready(function(server)
 end)
 
 -- null-ls
-null_ls.config({
+null_ls.setup({
 	sources = {
 		null_ls.builtins.code_actions.gitsigns,
 		null_ls.builtins.diagnostics.ansiblelint,
@@ -129,8 +129,6 @@ null_ls.config({
 		null_ls.builtins.formatting.stylua,
 	},
 })
-
-nvim_lsp["null-ls"].setup({})
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
